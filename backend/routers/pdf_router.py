@@ -3,7 +3,7 @@ import tempfile
 import os
 import pdfplumber 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-
+from services.chroma_manager import ChromaManager
 router = APIRouter()  
 
 text_splitter = RecursiveCharacterTextSplitter(
@@ -32,7 +32,10 @@ async def upload(file: UploadFile = File(...)):
                 if text:
                     chunks = text_splitter.split_text(text)
                     all_chunks.extend(chunks)
-            
+            chroma = ChromaManager()
+            chroma.add_texts(all_chunks, source=file.filename)
+            chroma.persist()
+
             return {
                 "filename": os.path.basename(tmp_file_path),  
                 "total_pages": len(pdf.pages),
