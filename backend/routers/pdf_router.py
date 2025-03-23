@@ -1,16 +1,63 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException
+from fastapi import APIRouter, UploadFile, File, HTTPException,Query
 import tempfile
 import os
 import pdfplumber 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from services.chroma_manager import ChromaManager
+from langchain.chains import RetrievalQA
+from langchain_groq import ChatGroq
+
+
+
+
 router = APIRouter()  
 
 text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=500,
-    chunk_overlap=50,
+    chunk_size=800,
+    chunk_overlap=200,
     separators=["\n\n", "\n", " ", ""] 
 )
+
+
+@router.get("/ask")
+async def ask(question:str=Query(...,description="The question to ask"),
+              k: int = Query(3,description="The number of blocks to query")
+              ):
+    try:
+        #Initialization Retriever and LLM
+        chroma = ChromaManager()
+        retriever = chroma.get_retriever(k=k)
+
+        #groq model
+        llm = ChatGroq(
+            temperature=0,
+            model_name="llama3-8b-8192",  
+        )
+        
+        # build the QA chain
+        qa_chain = RetrievalQA.from_chain_type(
+            llm = llm,
+            chain_type="stuff",
+            retriever=retriever,
+            return_source_documents=True,
+            input_key="query"
+        )
+
+        #Ask the question
+        result = qa_chain.invoke({"query": question})
+
+        #handle possible null values
+        sources = []
+        if "source_documents" in result:
+            sources = list({doc.metadata.get("source", "") for doc in result["source_documents"]})
+        
+        return {
+            "question": question,
+            "answer": result.get("result", "no answer"),
+            "sources": sources
+        }
+    except Exception as e:
+        raise HTTPException(500, f"Answer error: {str(e)}")
 
 @router.post("/upload")  
 async def upload(file: UploadFile = File(...)):
@@ -34,7 +81,7 @@ async def upload(file: UploadFile = File(...)):
                     all_chunks.extend(chunks)
             chroma = ChromaManager()
             chroma.add_texts(all_chunks, source=file.filename)
-            chroma.persist()
+
 
             return {
                 "filename": os.path.basename(tmp_file_path),  
@@ -45,8 +92,6 @@ async def upload(file: UploadFile = File(...)):
                 ]
             }  
     
-    except pdfplumber.PDFSyntaxError:
-        raise HTTPException(422, "PDF is encrypted or corrupted")
     except IOError as e:
         raise HTTPException(500, f"I/O Error: {str(e)}")
     except Exception as e:
