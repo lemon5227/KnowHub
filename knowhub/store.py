@@ -146,6 +146,8 @@ class Store:
                 raise ValueError("This run has no pending decision")
             if not approved:
                 run["status"] = "rejected"
+                run["draft_answer"] = run.get("answer", "")
+                run["answer"] = "已拒绝本次处理方案，未执行工单写入。原始建议保留在操作方案与执行记录中。"
             else:
                 proposal = run["proposal"]
                 if proposal["status"] not in {"in_progress", "resolved"} or not proposal["note"].strip():
@@ -164,6 +166,11 @@ class Store:
                     (run_id, ticket["id"], ticket["status"], proposal["status"], proposal["note"]),
                 )
                 run["status"] = "completed"
+                run["draft_answer"] = run.get("answer", "")
+                run["answer"] = (
+                    f"审批已完成：工单 {ticket['id']} 的状态已从 {ticket['status']} 更新为 {proposal['status']}。"
+                    "处理备注已写入，审计记录已保存。原始建议可在操作方案与执行记录中查看。"
+                )
             run["decision_at"] = now()
             conn.execute("UPDATE runs SET data=%s WHERE id=%s", (Jsonb(run), run_id))
             return run

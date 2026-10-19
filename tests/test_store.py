@@ -58,3 +58,13 @@ def test_unsupported_status_does_not_write(store):
     with pytest.raises(ValueError):
         store.approve_run(run["id"], True)
     assert store.ticket("TK-1")["version"] == 1
+
+
+def test_completed_result_describes_saved_state_not_pending_approval(store):
+    run = staged(store)
+    run["answer"] = "待人工确认，尚未修改工单。"
+    store.save_run(run)
+    result = store.approve_run(run["id"], True)
+    assert "in_progress" in result["answer"]
+    assert "待人工确认" not in result["answer"]
+    assert result["draft_answer"] == "待人工确认，尚未修改工单。"
