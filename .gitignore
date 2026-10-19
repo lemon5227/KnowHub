@@ -8,6 +8,7 @@ __pycache__/
 .env.*
 !.env.example
 .superpowers/
+.playwright-cli/
 node_modules/
 frontend/dist/
 data/

@@ -126,3 +126,50 @@ def test_forged_citation_in_staged_note_is_rejected(store):
     run = Agent(store, NoKnowledge(), p).run("Prepare update", "TK-1")
     assert run["proposal"] is None
     assert store.ticket("TK-1")["version"] == 1
+
+
+def test_rag_embedding_failure_is_persisted_as_failure(store):
+    class BrokenRetrieval:
+        def search(self, *args, **kwargs):
+            raise RuntimeError("Private transport context")
+
+    run = Agent(store, BrokenRetrieval(), ScriptedProvider([])).run("policy", mode="rag")
+    assert run["status"] == "failed"
+    assert store.run(run["id"])["status"] == "failed"
+
+
+def test_pending_decision_is_published_only_after_final_snapshot(store):
+    """An operator must never approve a snapshot that an agent later overwrites."""
+    provider = ScriptedProvider(
+        [
+            call("ticket_lookup", {"ticket_id": "TK-1"}),
+            call(
+                "propose_ticket_update",
+                {"ticket_id": "TK-1", "status": "in_progress", "note": "Contact carrier"},
+            ),
+        ]
+    )
+    original_save = store.save_run
+    pending_saves = []
+
+    def approve_when_published(run):
+        original_save(run)
+        if run["status"] == "awaiting_approval":
+            pending_saves.append(run["id"])
+            store.approve_run(run["id"], True)
+
+    store.save_run = approve_when_published
+    run = Agent(store, NoKnowledge(), provider).run("Prepare update", "TK-1")
+    assert len(pending_saves) == 1
+    assert store.run(run["id"])["status"] == "completed"
+    assert len(store.audit()) == 1
+
+
+def test_multiple_valid_citations_in_one_bracket_are_accepted(store):
+    class Sources:
+        def search(self, *args, **kwargs):
+            return [{"id": "source-a"}, {"id": "source-b"}]
+
+    p = ScriptedProvider([answer("按两份规范处理 [KB:source-a, KB:source-b]")])
+    run = Agent(store, Sources(), p).run("policy", mode="rag")
+    assert run["status"] == "completed"

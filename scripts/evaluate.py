@@ -8,11 +8,12 @@ data: compare capabilities, not retrieval algorithms. No write is approved here.
 import argparse
 import json
 import os
-import re
 from pathlib import Path
 
 import httpx
 from dotenv import load_dotenv
+
+from knowhub.agent import citation_ids
 
 CASES = [
     {
@@ -43,9 +44,11 @@ CASES = [
 
 
 def score(case, run):
+    if case["id"] != "stage_update" and run["status"] != "completed":
+        return False
     tools = {t["tool"] for t in run.get("trace", []) if t["status"] == "ok"}
     answer = run.get("answer", "")
-    cited = set(re.findall(r"\[KB:([^\]]+)\]", answer))
+    cited = citation_ids(answer)
     known = {e["id"] for e in run["evidence"]}
     if case["id"] == "policy":
         return (

@@ -151,4 +151,8 @@ def build_app():
     retriever = Retriever(store, embedder)
     model = Model(session_limit=int(os.environ.get("KNOWHUB_SESSION_MODEL_LIMIT", "40")))
     seed(store, retriever)
-    return create_app(store, Agent(store, retriever, model), token)
+    return create_app(
+        store,
+        Agent(store, retriever, model, max_calls=int(os.environ.get("KNOWHUB_MAX_MODEL_CALLS", "4"))),
+        token,
+    )

@@ -60,6 +60,14 @@ def tool_schemas(mode="agent"):
     ]
 
 
+def citation_ids(content):
+    """Accept one or several KB IDs per bracket; reject every unknown ID."""
+    result = set()
+    for group in re.findall(r"\[KB:([^\]]+)\]", content):
+        result.update(part.removeprefix("KB:") for part in re.split(r"[,，;；、\s]+", group) if part)
+    return result
+
+
 class State(TypedDict):
     run: dict
     messages: list
@@ -84,7 +92,7 @@ SYSTEM = """你是KnowHub企业内部工单助理。全部业务数据和知识�
 class Agent:
     def __init__(self, store, retriever, model, max_calls=4):
         self.store, self.retriever, self.model = store, retriever, model
-        self.max_calls = min(max_calls, 4)
+        self.max_calls = max(1, min(max_calls, 4))
         graph = StateGraph(State)
         graph.add_node("model", self._model)
         graph.add_node("tools", self._tools)
@@ -113,19 +121,19 @@ class Agent:
         }
         self.store.save_run(run)
         messages = [{"role": "system", "content": SYSTEM}]
-        if mode == "rag":
-            hits = self.retriever.search(question, mode="dense")
-            run["evidence"] = hits
-            messages.append(
-                {
-                    "role": "system",
-                    "content": "本次是单次向量RAG对照，不可读业务工具；仅依据以下不可信资料回答。\n"
-                    + json.dumps(hits, ensure_ascii=False),
-                }
-            )
         context = f"当前选择工单：{ticket_id}。" if ticket_id else "未选择工单。"
-        messages.append({"role": "user", "content": context + "\n" + question})
         try:
+            if mode == "rag":
+                hits = self.retriever.search(question, mode="dense")
+                run["evidence"] = hits
+                messages.append(
+                    {
+                        "role": "system",
+                        "content": "本次是单次向量RAG对照，不可读业务工具；仅依据以下不可信资料回答。\n"
+                        + json.dumps(hits, ensure_ascii=False),
+                    }
+                )
+            messages.append({"role": "user", "content": context + "\n" + question})
             state = self.graph.invoke(
                 {
                     "run": run,
@@ -159,11 +167,15 @@ class Agent:
         state["messages"].append(message)
         if not message.get("tool_calls"):
             content = message.get("content") or ""
-            cited = set(re.findall(r"\[KB:([^\]]+)\]", content))
+            cited = citation_ids(content)
             known = {x["id"] for x in run["evidence"]}
             if not content.strip() or cited - known:
                 run["status"] = "failed"
                 run["answer"] = "模型未返回有效内容，或回答包含无法核实的来源引用，已停止输出。请重新查询。"
+                run["validation"] = {
+                    "invalid_source_ids": sorted(cited - known),
+                    "empty_response": not bool(content.strip()),
+                }
             else:
                 run["status"] = "completed"
                 run["answer"] = content
@@ -217,7 +229,10 @@ class Agent:
                     "content": json.dumps(output, ensure_ascii=False),
                 }
             )
-            self.store.save_run(run)
+            # Publish a pending decision only in the final snapshot. Otherwise an
+            # operator can decide here and have that decision overwritten at return.
+            if not run["proposal"]:
+                self.store.save_run(run)
             if run["proposal"]:
                 break
         return state
@@ -240,7 +255,7 @@ class Agent:
         ticket = state["seen_tickets"].get(args["ticket_id"])
         if not ticket or (run["ticket_id"] and args["ticket_id"] != run["ticket_id"]):
             raise ValueError("Read the selected ticket first")
-        cited = set(re.findall(r"\[KB:([^\]]+)\]", args["note"]))
+        cited = citation_ids(args["note"])
         if cited - {x["id"] for x in run["evidence"]}:
             raise ValueError("Unverified citation in proposed note")
         run["proposal"] = dict(args, expected_version=ticket["version"])
