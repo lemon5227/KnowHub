@@ -1,0 +1,147 @@
+{
+  "id": "0fdc38b9-fc65-4d17-a6ff-fd15754765b9",
+  "question": "查询TK-1042关联订单的实际状态和预计延迟时间，结合规范说明如何跟进。不要更新工单。",
+  "ticket_id": "TK-1042",
+  "mode": "agent",
+  "status": "completed",
+  "answer": "**核实结果**\n\n- 工单 TK-1042（订单延迟，需核实与跟进）：状态 in_progress，优先级 high，关联订单 ORD-1001，客户为示例客户林女士。\n- 订单 ORD-1001 的实际状态：**delayed**；承运商为星桥物流；**预计延迟 48 小时**；**尚未送达**，需要物流专员跟进。\n\n**规范依据**\n\n- 订单状态为 delayed 时，客服应查询订单中的承运商备注，通知客户预计延迟时间，并联系承运商核实；预计延迟超过 24 小时，需要升级物流专员；不能凭工单描述自行编造到达日期。[KB:ab726aaf-080f-55bd-a6fc-76cecb72e69a]\n- 工单应转为 in_progress，并记录查询到的订单号、实际延迟和升级原因；承运商尚未确认送达时，不能将工单标为 resolved。[KB:ab726aaf-080f-55bd-a6fc-76cecb72e69a]\n- 状态变更必须有说明，包含实际核实的业务事实；变更建议需操作员明确确认后才执行。[KB:344416cb-8fa7-50b4-a626-b78d802b3a52]\n\n**跟进建议**\n\n1. 按规范通知客户林女士：订单 ORD-1001 由星桥物流承运，预计延迟 48 小时，尚未送达；不要承诺具体到达日期。\n2. 联系星桥物流核实实际运输进度，并记录核实时间与回复。\n3. 因延迟 48 小时已超过 24 小时阈值，**升级物流专员**跟进。\n4. 工单保持 in_progress；待承运商确认送达、问题实际解决后，才可考虑标记 resolved。\n\n**说明**：本次未更新工单（按你的要求）。工单现有 resolution 字段已记录上述核实内容，但该内容属于待人工确认的暂存建议，尚未生效。知识库中没有关于赔偿、金额或特殊补偿的依据，如需此类承诺，需另行人工核实。",
+  "evidence": [
+    {
+      "id": "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+      "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+      "section": "延迟与承运商升级",
+      "page": null,
+      "text": "## 延迟与承运商升级\n订单状态为 delayed 时，客服应查询订单中的承运商备注，通知客户预计延迟时间，并联系承运商核实。预计延迟超过24小时，需要升级物流专员。不能凭工单描述自行编造到达日期。\n工单应转为 in_progress（处理中），记录查询到的订单号、实际延迟和升级原因。承运商尚未确认送达时，不能将工单标为 resolved（已解决）。",
+      "name": "delivery",
+      "source": "demo/delivery.md",
+      "score": 0.03278688524590164
+    },
+    {
+      "id": "aecbfc25-36fd-5855-adee-f82ffeb741e4",
+      "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+      "section": "不足与冲突",
+      "page": null,
+      "text": "## 不足与冲突\n缺少订单号、工单号或客户诉求时，先询问需要的字段，不能猜测客户记录。知识库没有的赔偿、特殊合同、金额或政策必须说明没有依据，不能套用相似政策。规范与当前订单备注冲突时，保留两方证据并转人工核实。",
+      "name": "operations",
+      "source": "demo/operations.md",
+      "score": 0.031754032258064516
+    },
+    {
+      "id": "344416cb-8fa7-50b4-a626-b78d802b3a52",
+      "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+      "section": "状态变更",
+      "page": null,
+      "text": "## 状态变更\nopen 表示尚未开始处理，in_progress 表示已核实并正在跟进，resolved 表示已核实问题解决。\n每次变更必须有说明，包含实际核实的业务事实。生成的变更建议需要操作员明确确认后才执行；拒绝建议不会修改工单。",
+      "name": "operations",
+      "source": "demo/operations.md",
+      "score": 0.03128054740957967
+    },
+    {
+      "id": "1567ed79-1b18-52f9-9b86-ec0722575331",
+      "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+      "section": "配送异常处理规范",
+      "page": null,
+      "text": "# 配送异常处理规范\n本文件为 KnowHub 模拟企业演示数据，不代表任何真实公司政策。版本 2026-10-20。",
+      "name": "delivery",
+      "source": "demo/delivery.md",
+      "score": 0.031024531024531024
+    }
+  ],
+  "trace": [
+    {
+      "step": 1,
+      "tool": "ticket_lookup",
+      "arguments": {
+        "ticket_id": "TK-1042"
+      },
+      "result": {
+        "id": "TK-1042",
+        "title": "订单延迟，需要核实与跟进",
+        "customer": "示例客户 林女士",
+        "order_id": "ORD-1001",
+        "status": "in_progress",
+        "priority": "high",
+        "description": "客户表示订单未按时到达，请查询实际状态并提供处理建议。",
+        "version": 2,
+        "resolution": "已核实订单 ORD-1001：状态 delayed，承运商星桥物流，预计延迟48小时，尚未送达。依据配送异常处理规范（延迟超过24小时需升级物流专员），转处理中并升级物流专员跟进；承运商未确认送达前不得标记已解决。待人工确认后执行。"
+      },
+      "duration_ms": 24,
+      "status": "ok"
+    },
+    {
+      "step": 2,
+      "tool": "knowledge_search",
+      "arguments": {
+        "query": "物流延迟 跟进规范 预计延迟时间 客户沟通"
+      },
+      "result": [
+        {
+          "id": "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+          "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+          "section": "延迟与承运商升级",
+          "page": null,
+          "text": "## 延迟与承运商升级\n订单状态为 delayed 时，客服应查询订单中的承运商备注，通知客户预计延迟时间，并联系承运商核实。预计延迟超过24小时，需要升级物流专员。不能凭工单描述自行编造到达日期。\n工单应转为 in_progress（处理中），记录查询到的订单号、实际延迟和升级原因。承运商尚未确认送达时，不能将工单标为 resolved（已解决）。",
+          "name": "delivery",
+          "source": "demo/delivery.md",
+          "score": 0.03278688524590164
+        },
+        {
+          "id": "aecbfc25-36fd-5855-adee-f82ffeb741e4",
+          "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+          "section": "不足与冲突",
+          "page": null,
+          "text": "## 不足与冲突\n缺少订单号、工单号或客户诉求时，先询问需要的字段，不能猜测客户记录。知识库没有的赔偿、特殊合同、金额或政策必须说明没有依据，不能套用相似政策。规范与当前订单备注冲突时，保留两方证据并转人工核实。",
+          "name": "operations",
+          "source": "demo/operations.md",
+          "score": 0.031754032258064516
+        },
+        {
+          "id": "344416cb-8fa7-50b4-a626-b78d802b3a52",
+          "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+          "section": "状态变更",
+          "page": null,
+          "text": "## 状态变更\nopen 表示尚未开始处理，in_progress 表示已核实并正在跟进，resolved 表示已核实问题解决。\n每次变更必须有说明，包含实际核实的业务事实。生成的变更建议需要操作员明确确认后才执行；拒绝建议不会修改工单。",
+          "name": "operations",
+          "source": "demo/operations.md",
+          "score": 0.03128054740957967
+        },
+        {
+          "id": "1567ed79-1b18-52f9-9b86-ec0722575331",
+          "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+          "section": "配送异常处理规范",
+          "page": null,
+          "text": "# 配送异常处理规范\n本文件为 KnowHub 模拟企业演示数据，不代表任何真实公司政策。版本 2026-10-20。",
+          "name": "delivery",
+          "source": "demo/delivery.md",
+          "score": 0.031024531024531024
+        }
+      ],
+      "duration_ms": 174,
+      "status": "ok"
+    },
+    {
+      "step": 3,
+      "tool": "order_lookup",
+      "arguments": {
+        "order_id": "ORD-1001"
+      },
+      "result": {
+        "id": "ORD-1001",
+        "customer": "示例客户 林女士",
+        "status": "delayed",
+        "details": "演示承运商：星桥物流。预计延迟48小时，尚未送达；需要物流专员跟进。"
+      },
+      "duration_ms": 25,
+      "status": "ok"
+    }
+  ],
+  "proposal": null,
+  "usage": {
+    "model_calls": 3,
+    "prompt_tokens": 4976,
+    "completion_tokens": 603,
+    "total_tokens": 5579
+  },
+  "elapsed_ms": 5748,
+  "created_at": "2026-10-19T22:36:23.691839+00:00"
+}

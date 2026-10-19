@@ -1,0 +1,18 @@
+{
+  "upload": {
+    "document_id": "555e8251-aa44-518a-8d23-75a034164a97",
+    "chunks": 1
+  },
+  "evidence": [
+    {
+      "id": "abdb249e-c56d-514b-b74f-9f1089db36c7",
+      "document_id": "555e8251-aa44-518a-8d23-75a034164a97",
+      "section": "knowhub-pdf-smoke.pdf",
+      "page": 1,
+      "text": "PDF ingestion verification fixture. Not business policy.",
+      "name": "knowhub-pdf-smoke.pdf",
+      "source": "uploads/knowhub-pdf-smoke.pdf"
+    }
+  ],
+  "model_calls": 0
+}
