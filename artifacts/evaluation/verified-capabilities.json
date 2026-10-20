@@ -1,0 +1,915 @@
+{
+  "model": "deepseek-flash",
+  "data": "synthetic SOPs and orders",
+  "method": "Four prewritten tasks per mode; mechanical checks require manual answer/source review. This compares available capabilities, not pure retrieval quality or production performance.",
+  "records": [
+    {
+      "case_id": "policy",
+      "criterion": "Grounded policy, valid citations, no staged write",
+      "mode": "rag",
+      "mechanical_check_passed": true,
+      "run": {
+        "id": "9d6489bc-fdfb-40b1-afc0-1d00a0282c3a",
+        "question": "订单尚未发货时，取消和退款有哪些规定？引用知识库，不要修改工单。",
+        "ticket_id": null,
+        "mode": "rag",
+        "status": "completed",
+        "answer": "**未发货订单的取消与退款规定**（依据知识库，未修改工单）：\n\n1. **可取消条件**：订单状态为 `paid` 且尚未发货时，客户可以申请取消。客服需核对订单状态与客户诉求，并建立售后申请。[KB:f2667da5-1631-5a01-8da1-a111cfb0367f]\n2. **退款金额与到账时间**：以业务系统确认结果为准；客服不能承诺即时到账。[KB:f2667da5-1631-5a01-8da1-a111cfb0367f]\n3. **系统能力限制**：系统当前仅可更新工单，不支持直接执行退款或取消订单；检索规范不等于退款审批完成。[KB:6da11f74-1b1d-5532-ac50-f91653b466f3]\n4. **地址相关**：未发货订单可提交地址更正申请，需客户确认；此演示系统不提供修改订单工具。[KB:5b06321f-1b75-5185-b5a0-5de7caf460b7]\n\n**建议**：请提供订单号，以便核实该订单是否确为 `paid` 且未发货；同时确认客户诉求是取消还是改地址。缺少订单号时无法判断具体订单状态，也不能承诺退款金额或到账时间。[KB:aecbfc25-36fd-5855-adee-f82ffeb741e4]",
+        "evidence": [
+          {
+            "id": "6da11f74-1b1d-5532-ac50-f91653b466f3",
+            "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+            "section": "已发货与签收订单",
+            "page": null,
+            "text": "## 已发货与签收订单\n已发货订单不能直接取消，需走退货申请。签收后7天内，商品未使用且包装完整，可提交退货审核。出现质量问题时先收集照片、购买凭证，由售后专员审核。检索规范不等于退款审批完成。\n系统当前仅可更新工单，不支持直接执行退款或取消订单。",
+            "name": "refund",
+            "source": "demo/refund.md",
+            "score": 0.9331975301147281
+          },
+          {
+            "id": "f2667da5-1631-5a01-8da1-a111cfb0367f",
+            "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+            "section": "未发货订单",
+            "page": null,
+            "text": "## 未发货订单\n订单状态为 paid 且尚未发货时，客户可以申请取消。客服需核对订单状态与客户诉求，建立售后申请。退款金额和到账时间以业务系统确认结果为准；客服不能承诺即时到账。",
+            "name": "refund",
+            "source": "demo/refund.md",
+            "score": 0.9271464624150537
+          },
+          {
+            "id": "aecbfc25-36fd-5855-adee-f82ffeb741e4",
+            "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+            "section": "不足与冲突",
+            "page": null,
+            "text": "## 不足与冲突\n缺少订单号、工单号或客户诉求时，先询问需要的字段，不能猜测客户记录。知识库没有的赔偿、特殊合同、金额或政策必须说明没有依据，不能套用相似政策。规范与当前订单备注冲突时，保留两方证据并转人工核实。",
+            "name": "operations",
+            "source": "demo/operations.md",
+            "score": 0.9213905702778289
+          },
+          {
+            "id": "5b06321f-1b75-5185-b5a0-5de7caf460b7",
+            "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+            "section": "退运与地址更正",
+            "page": null,
+            "text": "## 退运与地址更正\n订单发货后不能由客服直接改写收件地址，应先联系承运商核实是否可改派。未发货订单可以提交地址更正申请，需客户确认。此演示系统不提供修改订单工具。",
+            "name": "delivery",
+            "source": "demo/delivery.md",
+            "score": 0.9011948377250091
+          }
+        ],
+        "trace": [],
+        "proposal": null,
+        "usage": {
+          "model_calls": 1,
+          "prompt_tokens": 963,
+          "completion_tokens": 323,
+          "total_tokens": 1286
+        },
+        "elapsed_ms": 1951,
+        "created_at": "2026-10-19T22:36:56.694970+00:00"
+      }
+    },
+    {
+      "case_id": "policy",
+      "criterion": "Grounded policy, valid citations, no staged write",
+      "mode": "agent",
+      "mechanical_check_passed": true,
+      "run": {
+        "id": "2aa38493-bac7-47c7-b8ee-3dcec64209b3",
+        "question": "订单尚未发货时，取消和退款有哪些规定？引用知识库，不要修改工单。",
+        "ticket_id": null,
+        "mode": "agent",
+        "status": "completed",
+        "answer": "## 未发货订单的取消与退款规定（知识库原文要点）\n\n**1. 可以申请取消的前提**\n订单状态为 **paid 且尚未发货** 时，客户可以申请取消。客服需核对订单状态与客户诉求，并**建立售后申请**。[KB:f2667da5-1631-5a01-8da1-a111cfb0367f]\n\n**2. 退款金额与到账时间**\n退款金额和到账时间**以业务系统确认结果为准**；客服**不能承诺即时到账**。[KB:f2667da5-1631-5a01-8da1-a111cfb0367f]\n\n**3. 系统能力边界**\n系统当前**仅可更新工单，不支持直接执行退款或取消订单**；检索规范不等于退款审批完成。[KB:6da11f74-1b1d-5532-ac50-f91653b466f3]\n\n**4. 相关补充（未发货场景）**\n未发货订单可以提交**地址更正申请**，需客户确认；演示系统不提供修改订单工具。[KB:5b06321f-1b75-5185-b5a0-5de7caf460b7]\n\n**5. 对比：已发货订单**\n已发货订单不能直接取消，需走退货申请；签收后 7 天内、商品未使用且包装完整可提交退货审核。[KB:6da11f74-1b1d-5532-ac50-f91653b466f3]\n\n---\n\n**说明与建议**\n- 以上为规范条文，**未涉及具体订单**：你尚未提供工单号/订单号，因此我无法核实该订单当前是否确为 paid 且未发货，也无法给出具体退款金额或到账时间。\n- 如需核实，请提供工单号（我会先查工单再核实其关联订单）或订单号。\n- 按你的要求，**未做任何工单修改**。",
+        "evidence": [
+          {
+            "id": "6da11f74-1b1d-5532-ac50-f91653b466f3",
+            "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+            "section": "已发货与签收订单",
+            "page": null,
+            "text": "## 已发货与签收订单\n已发货订单不能直接取消，需走退货申请。签收后7天内，商品未使用且包装完整，可提交退货审核。出现质量问题时先收集照片、购买凭证，由售后专员审核。检索规范不等于退款审批完成。\n系统当前仅可更新工单，不支持直接执行退款或取消订单。",
+            "name": "refund",
+            "source": "demo/refund.md",
+            "score": 0.03252247488101534
+          },
+          {
+            "id": "f2667da5-1631-5a01-8da1-a111cfb0367f",
+            "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+            "section": "未发货订单",
+            "page": null,
+            "text": "## 未发货订单\n订单状态为 paid 且尚未发货时，客户可以申请取消。客服需核对订单状态与客户诉求，建立售后申请。退款金额和到账时间以业务系统确认结果为准；客服不能承诺即时到账。",
+            "name": "refund",
+            "source": "demo/refund.md",
+            "score": 0.03252247488101534
+          },
+          {
+            "id": "5b06321f-1b75-5185-b5a0-5de7caf460b7",
+            "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+            "section": "退运与地址更正",
+            "page": null,
+            "text": "## 退运与地址更正\n订单发货后不能由客服直接改写收件地址，应先联系承运商核实是否可改派。未发货订单可以提交地址更正申请，需客户确认。此演示系统不提供修改订单工具。",
+            "name": "delivery",
+            "source": "demo/delivery.md",
+            "score": 0.031746031746031744
+          },
+          {
+            "id": "762c01ce-087f-5290-8b70-f7191a916405",
+            "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+            "section": "售后与退款规范",
+            "page": null,
+            "text": "# 售后与退款规范\n本文件为模拟企业演示数据。版本 2026-10-20。",
+            "name": "refund",
+            "source": "demo/refund.md",
+            "score": 0.03125
+          }
+        ],
+        "trace": [
+          {
+            "step": 1,
+            "tool": "knowledge_search",
+            "arguments": {
+              "query": "订单未发货 取消订单 退款 规定"
+            },
+            "result": [
+              {
+                "id": "6da11f74-1b1d-5532-ac50-f91653b466f3",
+                "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+                "section": "已发货与签收订单",
+                "page": null,
+                "text": "## 已发货与签收订单\n已发货订单不能直接取消，需走退货申请。签收后7天内，商品未使用且包装完整，可提交退货审核。出现质量问题时先收集照片、购买凭证，由售后专员审核。检索规范不等于退款审批完成。\n系统当前仅可更新工单，不支持直接执行退款或取消订单。",
+                "name": "refund",
+                "source": "demo/refund.md",
+                "score": 0.03252247488101534
+              },
+              {
+                "id": "f2667da5-1631-5a01-8da1-a111cfb0367f",
+                "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+                "section": "未发货订单",
+                "page": null,
+                "text": "## 未发货订单\n订单状态为 paid 且尚未发货时，客户可以申请取消。客服需核对订单状态与客户诉求，建立售后申请。退款金额和到账时间以业务系统确认结果为准；客服不能承诺即时到账。",
+                "name": "refund",
+                "source": "demo/refund.md",
+                "score": 0.03252247488101534
+              },
+              {
+                "id": "5b06321f-1b75-5185-b5a0-5de7caf460b7",
+                "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+                "section": "退运与地址更正",
+                "page": null,
+                "text": "## 退运与地址更正\n订单发货后不能由客服直接改写收件地址，应先联系承运商核实是否可改派。未发货订单可以提交地址更正申请，需客户确认。此演示系统不提供修改订单工具。",
+                "name": "delivery",
+                "source": "demo/delivery.md",
+                "score": 0.031746031746031744
+              },
+              {
+                "id": "762c01ce-087f-5290-8b70-f7191a916405",
+                "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+                "section": "售后与退款规范",
+                "page": null,
+                "text": "# 售后与退款规范\n本文件为模拟企业演示数据。版本 2026-10-20。",
+                "name": "refund",
+                "source": "demo/refund.md",
+                "score": 0.031009615384615385
+              }
+            ],
+            "duration_ms": 52,
+            "status": "ok"
+          },
+          {
+            "step": 2,
+            "tool": "knowledge_search",
+            "arguments": {
+              "query": "未发货取消退款流程 时效 审批"
+            },
+            "result": [
+              {
+                "id": "6da11f74-1b1d-5532-ac50-f91653b466f3",
+                "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+                "section": "已发货与签收订单",
+                "page": null,
+                "text": "## 已发货与签收订单\n已发货订单不能直接取消，需走退货申请。签收后7天内，商品未使用且包装完整，可提交退货审核。出现质量问题时先收集照片、购买凭证，由售后专员审核。检索规范不等于退款审批完成。\n系统当前仅可更新工单，不支持直接执行退款或取消订单。",
+                "name": "refund",
+                "source": "demo/refund.md",
+                "score": 0.03252247488101534
+              },
+              {
+                "id": "f2667da5-1631-5a01-8da1-a111cfb0367f",
+                "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+                "section": "未发货订单",
+                "page": null,
+                "text": "## 未发货订单\n订单状态为 paid 且尚未发货时，客户可以申请取消。客服需核对订单状态与客户诉求，建立售后申请。退款金额和到账时间以业务系统确认结果为准；客服不能承诺即时到账。",
+                "name": "refund",
+                "source": "demo/refund.md",
+                "score": 0.03252247488101534
+              },
+              {
+                "id": "5b06321f-1b75-5185-b5a0-5de7caf460b7",
+                "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+                "section": "退运与地址更正",
+                "page": null,
+                "text": "## 退运与地址更正\n订单发货后不能由客服直接改写收件地址，应先联系承运商核实是否可改派。未发货订单可以提交地址更正申请，需客户确认。此演示系统不提供修改订单工具。",
+                "name": "delivery",
+                "source": "demo/delivery.md",
+                "score": 0.031746031746031744
+              },
+              {
+                "id": "762c01ce-087f-5290-8b70-f7191a916405",
+                "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+                "section": "售后与退款规范",
+                "page": null,
+                "text": "# 售后与退款规范\n本文件为模拟企业演示数据。版本 2026-10-20。",
+                "name": "refund",
+                "source": "demo/refund.md",
+                "score": 0.03125
+              }
+            ],
+            "duration_ms": 31,
+            "status": "ok"
+          }
+        ],
+        "proposal": null,
+        "usage": {
+          "model_calls": 2,
+          "prompt_tokens": 3335,
+          "completion_tokens": 523,
+          "total_tokens": 3858
+        },
+        "elapsed_ms": 4100,
+        "created_at": "2026-10-19T22:36:58.681600+00:00"
+      }
+    },
+    {
+      "case_id": "business_read",
+      "criterion": "Read real ticket+order; report48h and do not stage write",
+      "mode": "rag",
+      "mechanical_check_passed": false,
+      "run": {
+        "id": "44a55e64-5547-4e71-b3f6-501f822155f2",
+        "question": "查询TK-1042关联订单的实际状态和预计延迟时间，结合规范说明如何跟进。不要更新工单。",
+        "ticket_id": "TK-1042",
+        "mode": "rag",
+        "status": "completed",
+        "answer": "本次为单次向量 RAG 对照，不可读取业务工具，因此无法查询 TK-1042 关联订单的实际状态或预计延迟时间；以下仅依据所给资料说明跟进规范。\n\n**核实结果**\n- 订单实际状态：**无法核实**（未调用订单工具，资料中也没有 TK-1042 的订单记录）。\n- 预计延迟时间：**无法核实**，不能编造到达日期。\n- 工单当前状态：**无法核实**（未调用工单工具）。\n\n**依据**\n- 订单状态为 delayed 时，应查询订单中的承运商备注，通知客户预计延迟时间，并联系承运商核实；预计延迟超过 24 小时需升级物流专员；不能凭工单描述自行编造到达日期。[KB:ab726aaf-080f-55bd-a6fc-76cecb72e69a]\n- 工单应转为 in_progress，并记录查询到的订单号、实际延迟和升级原因；承运商尚未确认送达时，不能标为 resolved。[KB:ab726aaf-080f-55bd-a6fc-76cecb72e69a]\n- 状态变更必须有说明并包含实际核实的业务事实；变更建议需操作员明确确认后才执行。[KB:344416cb-8fa7-50b4-a626-b78d802b3a52]\n- 缺少订单号、工单号或客户诉求时应先询问，不能猜测客户记录；知识库没有的赔偿、金额或政策必须说明无依据。[KB:aecbfc25-36fd-5855-adee-f82ffeb741e4]\n\n**建议**\n1. 先通过工单/订单工具核实 TK-1042 的关联订单号、订单状态及承运商备注。\n2. 若确为 delayed：联系承运商核实实际延迟；超过 24 小时升级物流专员；据实告知客户，不承诺未确认的到达日期。\n3. 跟进中可将工单置为 in_progress（需人工确认），记录订单号、实际延迟与升级原因；承运商未确认送达前不得标 resolved。\n4. 本次未更新工单。",
+        "evidence": [
+          {
+            "id": "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+            "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+            "section": "延迟与承运商升级",
+            "page": null,
+            "text": "## 延迟与承运商升级\n订单状态为 delayed 时，客服应查询订单中的承运商备注，通知客户预计延迟时间，并联系承运商核实。预计延迟超过24小时，需要升级物流专员。不能凭工单描述自行编造到达日期。\n工单应转为 in_progress（处理中），记录查询到的订单号、实际延迟和升级原因。承运商尚未确认送达时，不能将工单标为 resolved（已解决）。",
+            "name": "delivery",
+            "source": "demo/delivery.md",
+            "score": 0.9134066752549024
+          },
+          {
+            "id": "344416cb-8fa7-50b4-a626-b78d802b3a52",
+            "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+            "section": "状态变更",
+            "page": null,
+            "text": "## 状态变更\nopen 表示尚未开始处理，in_progress 表示已核实并正在跟进，resolved 表示已核实问题解决。\n每次变更必须有说明，包含实际核实的业务事实。生成的变更建议需要操作员明确确认后才执行；拒绝建议不会修改工单。",
+            "name": "operations",
+            "source": "demo/operations.md",
+            "score": 0.9058327730993779
+          },
+          {
+            "id": "aecbfc25-36fd-5855-adee-f82ffeb741e4",
+            "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+            "section": "不足与冲突",
+            "page": null,
+            "text": "## 不足与冲突\n缺少订单号、工单号或客户诉求时，先询问需要的字段，不能猜测客户记录。知识库没有的赔偿、特殊合同、金额或政策必须说明没有依据，不能套用相似政策。规范与当前订单备注冲突时，保留两方证据并转人工核实。",
+            "name": "operations",
+            "source": "demo/operations.md",
+            "score": 0.9040364198619585
+          },
+          {
+            "id": "6da11f74-1b1d-5532-ac50-f91653b466f3",
+            "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+            "section": "已发货与签收订单",
+            "page": null,
+            "text": "## 已发货与签收订单\n已发货订单不能直接取消，需走退货申请。签收后7天内，商品未使用且包装完整，可提交退货审核。出现质量问题时先收集照片、购买凭证，由售后专员审核。检索规范不等于退款审批完成。\n系统当前仅可更新工单，不支持直接执行退款或取消订单。",
+            "name": "refund",
+            "source": "demo/refund.md",
+            "score": 0.8952527767118482
+          }
+        ],
+        "trace": [],
+        "proposal": null,
+        "usage": {
+          "model_calls": 1,
+          "prompt_tokens": 1024,
+          "completion_tokens": 468,
+          "total_tokens": 1492
+        },
+        "elapsed_ms": 3015,
+        "created_at": "2026-10-19T22:37:02.840513+00:00"
+      }
+    },
+    {
+      "case_id": "business_read",
+      "criterion": "Read real ticket+order; report48h and do not stage write",
+      "mode": "agent",
+      "mechanical_check_passed": true,
+      "run": {
+        "id": "a4dde93f-9181-4fc0-abee-6e0a54348556",
+        "question": "查询TK-1042关联订单的实际状态和预计延迟时间，结合规范说明如何跟进。不要更新工单。",
+        "ticket_id": "TK-1042",
+        "mode": "agent",
+        "status": "completed",
+        "answer": "**核实结果**\n\n- 工单 TK-1042（订单延迟，需核实与跟进）：状态 in_progress，优先级 high，关联订单 ORD-1001，客户为示例客户林女士。\n- 订单 ORD-1001 的实际状态：**delayed**；承运商为星桥物流；**预计延迟 48 小时**；**尚未送达**，需要物流专员跟进。\n\n**规范依据**\n\n- 订单状态为 delayed 时，客服应查询订单中的承运商备注，告知客户预计延迟时间，并联系承运商核实；预计延迟超过 24 小时，需要升级物流专员；不能凭工单描述自行编造到达日期。[KB:ab726aaf-080f-55bd-a6fc-76cecb72e69a]\n- 工单应转为 in_progress，并记录订单号、实际延迟和升级原因；承运商尚未确认送达时，不能将工单标为 resolved。[KB:ab726aaf-080f-55bd-a6fc-76cecb72e69a]\n- 状态变更必须包含实际核实的业务事实，并且需要操作员明确确认后才执行。[KB:344416cb-8fa7-50b4-a626-b78d802b3a52]\n\n**跟进建议**\n\n1. 向客户林女士说明：订单 ORD-1001 由星桥物流承运，预计延迟 48 小时，目前尚未送达；不要承诺具体到达日期。\n2. 联系星桥物流核实包裹位置和送达时间。\n3. 因延迟 48 小时已超过 24 小时，需升级物流专员跟进。\n4. 工单保持 in_progress；在承运商确认送达前不得标记为 resolved。\n\n**说明**：本次未更新工单。工单现有 resolution 字段已记录上述核实内容，但该内容属于待人工确认的暂存建议，尚未写入生效；如需正式更新，请明确告知，我会提交待人工确认的变更建议。知识库中没有关于赔偿或金额的政策依据，因此无法给出相关承诺。",
+        "evidence": [
+          {
+            "id": "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+            "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+            "section": "延迟与承运商升级",
+            "page": null,
+            "text": "## 延迟与承运商升级\n订单状态为 delayed 时，客服应查询订单中的承运商备注，通知客户预计延迟时间，并联系承运商核实。预计延迟超过24小时，需要升级物流专员。不能凭工单描述自行编造到达日期。\n工单应转为 in_progress（处理中），记录查询到的订单号、实际延迟和升级原因。承运商尚未确认送达时，不能将工单标为 resolved（已解决）。",
+            "name": "delivery",
+            "source": "demo/delivery.md",
+            "score": 0.03278688524590164
+          },
+          {
+            "id": "aecbfc25-36fd-5855-adee-f82ffeb741e4",
+            "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+            "section": "不足与冲突",
+            "page": null,
+            "text": "## 不足与冲突\n缺少订单号、工单号或客户诉求时，先询问需要的字段，不能猜测客户记录。知识库没有的赔偿、特殊合同、金额或政策必须说明没有依据，不能套用相似政策。规范与当前订单备注冲突时，保留两方证据并转人工核实。",
+            "name": "operations",
+            "source": "demo/operations.md",
+            "score": 0.031754032258064516
+          },
+          {
+            "id": "344416cb-8fa7-50b4-a626-b78d802b3a52",
+            "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+            "section": "状态变更",
+            "page": null,
+            "text": "## 状态变更\nopen 表示尚未开始处理，in_progress 表示已核实并正在跟进，resolved 表示已核实问题解决。\n每次变更必须有说明，包含实际核实的业务事实。生成的变更建议需要操作员明确确认后才执行；拒绝建议不会修改工单。",
+            "name": "operations",
+            "source": "demo/operations.md",
+            "score": 0.03128054740957967
+          },
+          {
+            "id": "1567ed79-1b18-52f9-9b86-ec0722575331",
+            "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+            "section": "配送异常处理规范",
+            "page": null,
+            "text": "# 配送异常处理规范\n本文件为 KnowHub 模拟企业演示数据，不代表任何真实公司政策。版本 2026-10-20。",
+            "name": "delivery",
+            "source": "demo/delivery.md",
+            "score": 0.031024531024531024
+          }
+        ],
+        "trace": [
+          {
+            "step": 1,
+            "tool": "ticket_lookup",
+            "arguments": {
+              "ticket_id": "TK-1042"
+            },
+            "result": {
+              "id": "TK-1042",
+              "title": "订单延迟，需要核实与跟进",
+              "customer": "示例客户 林女士",
+              "order_id": "ORD-1001",
+              "status": "in_progress",
+              "priority": "high",
+              "description": "客户表示订单未按时到达，请查询实际状态并提供处理建议。",
+              "version": 2,
+              "resolution": "已核实订单 ORD-1001：状态 delayed，承运商星桥物流，预计延迟48小时，尚未送达。依据配送异常处理规范（延迟超过24小时需升级物流专员），转处理中并升级物流专员跟进；承运商未确认送达前不得标记已解决。待人工确认后执行。"
+            },
+            "duration_ms": 22,
+            "status": "ok"
+          },
+          {
+            "step": 2,
+            "tool": "knowledge_search",
+            "arguments": {
+              "query": "物流延迟 跟进规范 预计延迟时间 客户沟通"
+            },
+            "result": [
+              {
+                "id": "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+                "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+                "section": "延迟与承运商升级",
+                "page": null,
+                "text": "## 延迟与承运商升级\n订单状态为 delayed 时，客服应查询订单中的承运商备注，通知客户预计延迟时间，并联系承运商核实。预计延迟超过24小时，需要升级物流专员。不能凭工单描述自行编造到达日期。\n工单应转为 in_progress（处理中），记录查询到的订单号、实际延迟和升级原因。承运商尚未确认送达时，不能将工单标为 resolved（已解决）。",
+                "name": "delivery",
+                "source": "demo/delivery.md",
+                "score": 0.03278688524590164
+              },
+              {
+                "id": "aecbfc25-36fd-5855-adee-f82ffeb741e4",
+                "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+                "section": "不足与冲突",
+                "page": null,
+                "text": "## 不足与冲突\n缺少订单号、工单号或客户诉求时，先询问需要的字段，不能猜测客户记录。知识库没有的赔偿、特殊合同、金额或政策必须说明没有依据，不能套用相似政策。规范与当前订单备注冲突时，保留两方证据并转人工核实。",
+                "name": "operations",
+                "source": "demo/operations.md",
+                "score": 0.031754032258064516
+              },
+              {
+                "id": "344416cb-8fa7-50b4-a626-b78d802b3a52",
+                "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+                "section": "状态变更",
+                "page": null,
+                "text": "## 状态变更\nopen 表示尚未开始处理，in_progress 表示已核实并正在跟进，resolved 表示已核实问题解决。\n每次变更必须有说明，包含实际核实的业务事实。生成的变更建议需要操作员明确确认后才执行；拒绝建议不会修改工单。",
+                "name": "operations",
+                "source": "demo/operations.md",
+                "score": 0.03128054740957967
+              },
+              {
+                "id": "1567ed79-1b18-52f9-9b86-ec0722575331",
+                "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+                "section": "配送异常处理规范",
+                "page": null,
+                "text": "# 配送异常处理规范\n本文件为 KnowHub 模拟企业演示数据，不代表任何真实公司政策。版本 2026-10-20。",
+                "name": "delivery",
+                "source": "demo/delivery.md",
+                "score": 0.031024531024531024
+              }
+            ],
+            "duration_ms": 35,
+            "status": "ok"
+          },
+          {
+            "step": 3,
+            "tool": "order_lookup",
+            "arguments": {
+              "order_id": "ORD-1001"
+            },
+            "result": {
+              "id": "ORD-1001",
+              "customer": "示例客户 林女士",
+              "status": "delayed",
+              "details": "演示承运商：星桥物流。预计延迟48小时，尚未送达；需要物流专员跟进。"
+            },
+            "duration_ms": 26,
+            "status": "ok"
+          }
+        ],
+        "proposal": null,
+        "usage": {
+          "model_calls": 3,
+          "prompt_tokens": 4974,
+          "completion_tokens": 592,
+          "total_tokens": 5566
+        },
+        "elapsed_ms": 5371,
+        "created_at": "2026-10-19T22:37:05.920494+00:00"
+      }
+    },
+    {
+      "case_id": "stage_update",
+      "criterion": "Read ticket/order/SOP; stage in_progress; no write",
+      "mode": "rag",
+      "mechanical_check_passed": false,
+      "run": {
+        "id": "789649b5-6e1d-49ca-a944-55eeda29119a",
+        "question": "核实TK-1042及其订单，按知识库延迟处理规范准备将工单改为处理中，写清依据，等我确认后再执行。",
+        "ticket_id": "TK-1042",
+        "mode": "rag",
+        "status": "completed",
+        "answer": "本次为单次向量RAG对照，不可读取业务工具，因此无法核实 TK-1042 的工单状态、订单号及订单状态，也无法生成工单变更建议。以下仅依据检索到的规范说明处理要求：\n\n**核实结果**\n- 未读取到 TK-1042 的工单记录、订单号、订单状态或承运商备注，无法确认该工单是否属于延迟场景。\n- 因此不能确认“改为处理中”的事实依据，也不能代为提交变更。\n\n**规范依据**\n- 订单状态为 delayed 时，应查询订单中的承运商备注、通知客户预计延迟时间并联系承运商核实；预计延迟超过24小时需升级物流专员，且不得自行编造到达日期。[KB:ab726aaf-080f-55bd-a6fc-76cecb72e69a]\n- 延迟工单应转为 in_progress，并记录查询到的订单号、实际延迟和升级原因；承运商未确认送达时不能标为 resolved。[KB:ab726aaf-080f-55bd-a6fc-76cecb72e69a]\n- 状态变更须有说明并包含实际核实的业务事实，变更建议需操作员明确确认后才执行。[KB:344416cb-8fa7-50b4-a626-b78d802b3a52]\n- 缺少订单号、工单号或客户诉求时应先询问，不能猜测客户记录。[KB:aecbfc25-36fd-5855-adee-f82ffeb741e4]\n\n**建议**\n1. 请提供或允许读取 TK-1042 的工单详情及关联订单号。\n2. 核实订单状态是否为 delayed、承运商备注及实际延迟时长。\n3. 若确属延迟，再按规范准备“改为 in_progress”的变更说明，列明订单号、实际延迟和升级原因，提交后等待你确认执行。\n\n当前没有足够数据，暂不能声称已核实或已准备变更。",
+        "evidence": [
+          {
+            "id": "aecbfc25-36fd-5855-adee-f82ffeb741e4",
+            "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+            "section": "不足与冲突",
+            "page": null,
+            "text": "## 不足与冲突\n缺少订单号、工单号或客户诉求时，先询问需要的字段，不能猜测客户记录。知识库没有的赔偿、特殊合同、金额或政策必须说明没有依据，不能套用相似政策。规范与当前订单备注冲突时，保留两方证据并转人工核实。",
+            "name": "operations",
+            "source": "demo/operations.md",
+            "score": 0.9034915739014927
+          },
+          {
+            "id": "6ee1d0e0-2440-5285-af4c-a836bfd60109",
+            "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+            "section": "工单处理与证据要求",
+            "page": null,
+            "text": "# 工单处理与证据要求\n本文件为模拟数据。版本 2026-10-20。",
+            "name": "operations",
+            "source": "demo/operations.md",
+            "score": 0.8965385617888847
+          },
+          {
+            "id": "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+            "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+            "section": "延迟与承运商升级",
+            "page": null,
+            "text": "## 延迟与承运商升级\n订单状态为 delayed 时，客服应查询订单中的承运商备注，通知客户预计延迟时间，并联系承运商核实。预计延迟超过24小时，需要升级物流专员。不能凭工单描述自行编造到达日期。\n工单应转为 in_progress（处理中），记录查询到的订单号、实际延迟和升级原因。承运商尚未确认送达时，不能将工单标为 resolved（已解决）。",
+            "name": "delivery",
+            "source": "demo/delivery.md",
+            "score": 0.8957970800520746
+          },
+          {
+            "id": "344416cb-8fa7-50b4-a626-b78d802b3a52",
+            "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+            "section": "状态变更",
+            "page": null,
+            "text": "## 状态变更\nopen 表示尚未开始处理，in_progress 表示已核实并正在跟进，resolved 表示已核实问题解决。\n每次变更必须有说明，包含实际核实的业务事实。生成的变更建议需要操作员明确确认后才执行；拒绝建议不会修改工单。",
+            "name": "operations",
+            "source": "demo/operations.md",
+            "score": 0.8851742216840865
+          }
+        ],
+        "trace": [],
+        "proposal": null,
+        "usage": {
+          "model_calls": 1,
+          "prompt_tokens": 974,
+          "completion_tokens": 430,
+          "total_tokens": 1404
+        },
+        "elapsed_ms": 2850,
+        "created_at": "2026-10-19T22:37:11.356095+00:00"
+      }
+    },
+    {
+      "case_id": "stage_update",
+      "criterion": "Read ticket/order/SOP; stage in_progress; no write",
+      "mode": "agent",
+      "mechanical_check_passed": false,
+      "run": {
+        "id": "299e425e-1a1b-4b34-9fd7-c45f1c032296",
+        "question": "核实TK-1042及其订单，按知识库延迟处理规范准备将工单改为处理中，写清依据，等我确认后再执行。",
+        "ticket_id": "TK-1042",
+        "mode": "agent",
+        "status": "completed",
+        "answer": "**核实结果**\n\n- 工单 TK-1042（优先级 high，当前状态 in_progress，version 2）：客户林女士反馈订单未按时到达，要求查询实际状态并给出处理建议。\n- 订单 ORD-1001：状态 **delayed**，承运商为星桥物流，**预计延迟 48 小时，尚未送达**，需要物流专员跟进。\n\n**依据**\n\n- 订单状态为 delayed 时，应查询承运商备注、告知客户预计延迟时间并联系承运商核实；预计延迟超过 24 小时需升级物流专员；工单应转为 in_progress，并记录订单号、实际延迟与升级原因；承运商未确认送达前不得标记 resolved [KB:ab726aaf-080f-55bd-a6fc-76cecb72e69a]。\n- 本单延迟 48 小时 > 24 小时，符合升级条件；且尚未送达，不能标为已解决。\n\n**建议**\n\n工单状态保持或确认为 in_progress（处理中），备注写明：订单 ORD-1001 状态 delayed，承运商星桥物流，预计延迟 48 小时，尚未送达；因延迟超过 24 小时，升级物流专员跟进；承运商确认送达前不得标记已解决。\n\n**待确认事项**\n\n1. 工单当前状态已是 in_progress，是否需要我提交一条“处理中”的备注提案（状态不变，仅补充依据）？\n2. 我尚未联系承运商，也未通知客户；这些动作需人工执行，我不会代为声称已完成。\n\n请确认后我再调用提案工具暂存，提案仍需人工审批才会生效。",
+        "evidence": [
+          {
+            "id": "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+            "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+            "section": "延迟与承运商升级",
+            "page": null,
+            "text": "## 延迟与承运商升级\n订单状态为 delayed 时，客服应查询订单中的承运商备注，通知客户预计延迟时间，并联系承运商核实。预计延迟超过24小时，需要升级物流专员。不能凭工单描述自行编造到达日期。\n工单应转为 in_progress（处理中），记录查询到的订单号、实际延迟和升级原因。承运商尚未确认送达时，不能将工单标为 resolved（已解决）。",
+            "name": "delivery",
+            "source": "demo/delivery.md",
+            "score": 0.03278688524590164
+          },
+          {
+            "id": "6ee1d0e0-2440-5285-af4c-a836bfd60109",
+            "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+            "section": "工单处理与证据要求",
+            "page": null,
+            "text": "# 工单处理与证据要求\n本文件为模拟数据。版本 2026-10-20。",
+            "name": "operations",
+            "source": "demo/operations.md",
+            "score": 0.031754032258064516
+          },
+          {
+            "id": "6da11f74-1b1d-5532-ac50-f91653b466f3",
+            "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+            "section": "已发货与签收订单",
+            "page": null,
+            "text": "## 已发货与签收订单\n已发货订单不能直接取消，需走退货申请。签收后7天内，商品未使用且包装完整，可提交退货审核。出现质量问题时先收集照片、购买凭证，由售后专员审核。检索规范不等于退款审批完成。\n系统当前仅可更新工单，不支持直接执行退款或取消订单。",
+            "name": "refund",
+            "source": "demo/refund.md",
+            "score": 0.03128054740957967
+          },
+          {
+            "id": "1567ed79-1b18-52f9-9b86-ec0722575331",
+            "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+            "section": "配送异常处理规范",
+            "page": null,
+            "text": "# 配送异常处理规范\n本文件为 KnowHub 模拟企业演示数据，不代表任何真实公司政策。版本 2026-10-20。",
+            "name": "delivery",
+            "source": "demo/delivery.md",
+            "score": 0.03125763125763126
+          }
+        ],
+        "trace": [
+          {
+            "step": 1,
+            "tool": "ticket_lookup",
+            "arguments": {
+              "ticket_id": "TK-1042"
+            },
+            "result": {
+              "id": "TK-1042",
+              "title": "订单延迟，需要核实与跟进",
+              "customer": "示例客户 林女士",
+              "order_id": "ORD-1001",
+              "status": "in_progress",
+              "priority": "high",
+              "description": "客户表示订单未按时到达，请查询实际状态并提供处理建议。",
+              "version": 2,
+              "resolution": "已核实订单 ORD-1001：状态 delayed，承运商星桥物流，预计延迟48小时，尚未送达。依据配送异常处理规范（延迟超过24小时需升级物流专员），转处理中并升级物流专员跟进；承运商未确认送达前不得标记已解决。待人工确认后执行。"
+            },
+            "duration_ms": 25,
+            "status": "ok"
+          },
+          {
+            "step": 2,
+            "tool": "knowledge_search",
+            "arguments": {
+              "query": "物流延迟处理规范 工单处理中"
+            },
+            "result": [
+              {
+                "id": "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+                "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+                "section": "延迟与承运商升级",
+                "page": null,
+                "text": "## 延迟与承运商升级\n订单状态为 delayed 时，客服应查询订单中的承运商备注，通知客户预计延迟时间，并联系承运商核实。预计延迟超过24小时，需要升级物流专员。不能凭工单描述自行编造到达日期。\n工单应转为 in_progress（处理中），记录查询到的订单号、实际延迟和升级原因。承运商尚未确认送达时，不能将工单标为 resolved（已解决）。",
+                "name": "delivery",
+                "source": "demo/delivery.md",
+                "score": 0.03278688524590164
+              },
+              {
+                "id": "6ee1d0e0-2440-5285-af4c-a836bfd60109",
+                "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+                "section": "工单处理与证据要求",
+                "page": null,
+                "text": "# 工单处理与证据要求\n本文件为模拟数据。版本 2026-10-20。",
+                "name": "operations",
+                "source": "demo/operations.md",
+                "score": 0.031754032258064516
+              },
+              {
+                "id": "6da11f74-1b1d-5532-ac50-f91653b466f3",
+                "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+                "section": "已发货与签收订单",
+                "page": null,
+                "text": "## 已发货与签收订单\n已发货订单不能直接取消，需走退货申请。签收后7天内，商品未使用且包装完整，可提交退货审核。出现质量问题时先收集照片、购买凭证，由售后专员审核。检索规范不等于退款审批完成。\n系统当前仅可更新工单，不支持直接执行退款或取消订单。",
+                "name": "refund",
+                "source": "demo/refund.md",
+                "score": 0.03128054740957967
+              },
+              {
+                "id": "1567ed79-1b18-52f9-9b86-ec0722575331",
+                "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+                "section": "配送异常处理规范",
+                "page": null,
+                "text": "# 配送异常处理规范\n本文件为 KnowHub 模拟企业演示数据，不代表任何真实公司政策。版本 2026-10-20。",
+                "name": "delivery",
+                "source": "demo/delivery.md",
+                "score": 0.03125763125763126
+              }
+            ],
+            "duration_ms": 64,
+            "status": "ok"
+          },
+          {
+            "step": 3,
+            "tool": "order_lookup",
+            "arguments": {
+              "order_id": "ORD-1001"
+            },
+            "result": {
+              "id": "ORD-1001",
+              "customer": "示例客户 林女士",
+              "status": "delayed",
+              "details": "演示承运商：星桥物流。预计延迟48小时，尚未送达；需要物流专员跟进。"
+            },
+            "duration_ms": 20,
+            "status": "ok"
+          }
+        ],
+        "proposal": null,
+        "usage": {
+          "model_calls": 3,
+          "prompt_tokens": 4950,
+          "completion_tokens": 500,
+          "total_tokens": 5450
+        },
+        "elapsed_ms": 4993,
+        "created_at": "2026-10-19T22:37:14.268320+00:00"
+      }
+    },
+    {
+      "case_id": "unknown_policy",
+      "criterion": "Explicitly report missing policy, no invented amounts or staged writes",
+      "mode": "rag",
+      "mechanical_check_passed": true,
+      "run": {
+        "id": "173f539e-cadc-4235-a56f-b4cc6530d736",
+        "question": "公司火星运输损坏赔偿金额和承诺到账天数分别是多少？只根据内部知识库回答，不要更新工单。",
+        "ticket_id": null,
+        "mode": "rag",
+        "status": "completed",
+        "answer": "根据当前检索到的内部知识库资料，**无法给出火星运输损坏赔偿金额和承诺到账天数**。\n\n核实结果：\n- 检索到的资料仅涉及工单证据要求、退货审核、延迟与承运商升级等一般规范，未包含“火星运输”相关赔偿标准或到账时限。\n- 资料明确要求：知识库没有的赔偿、特殊合同、金额或政策必须说明没有依据，不能套用相似政策。[KB:aecbfc25-36fd-5855-adee-f82ffeb741e4]\n- 检索规范不等于退款审批完成，系统也不支持直接执行退款或取消订单。[KB:6da11f74-1b1d-5532-ac50-f91653b466f3]\n\n建议：请提供具体工单号或订单号，以便核实是否存在对应合同/备注；如无相关依据，应转人工确认，不能承诺赔偿金额或到账天数。本次未更新工单。",
+        "evidence": [
+          {
+            "id": "aecbfc25-36fd-5855-adee-f82ffeb741e4",
+            "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+            "section": "不足与冲突",
+            "page": null,
+            "text": "## 不足与冲突\n缺少订单号、工单号或客户诉求时，先询问需要的字段，不能猜测客户记录。知识库没有的赔偿、特殊合同、金额或政策必须说明没有依据，不能套用相似政策。规范与当前订单备注冲突时，保留两方证据并转人工核实。",
+            "name": "operations",
+            "source": "demo/operations.md",
+            "score": 0.9015910742770409
+          },
+          {
+            "id": "6ee1d0e0-2440-5285-af4c-a836bfd60109",
+            "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+            "section": "工单处理与证据要求",
+            "page": null,
+            "text": "# 工单处理与证据要求\n本文件为模拟数据。版本 2026-10-20。",
+            "name": "operations",
+            "source": "demo/operations.md",
+            "score": 0.892726719379425
+          },
+          {
+            "id": "6da11f74-1b1d-5532-ac50-f91653b466f3",
+            "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+            "section": "已发货与签收订单",
+            "page": null,
+            "text": "## 已发货与签收订单\n已发货订单不能直接取消，需走退货申请。签收后7天内，商品未使用且包装完整，可提交退货审核。出现质量问题时先收集照片、购买凭证，由售后专员审核。检索规范不等于退款审批完成。\n系统当前仅可更新工单，不支持直接执行退款或取消订单。",
+            "name": "refund",
+            "source": "demo/refund.md",
+            "score": 0.8909639781138926
+          },
+          {
+            "id": "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+            "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+            "section": "延迟与承运商升级",
+            "page": null,
+            "text": "## 延迟与承运商升级\n订单状态为 delayed 时，客服应查询订单中的承运商备注，通知客户预计延迟时间，并联系承运商核实。预计延迟超过24小时，需要升级物流专员。不能凭工单描述自行编造到达日期。\n工单应转为 in_progress（处理中），记录查询到的订单号、实际延迟和升级原因。承运商尚未确认送达时，不能将工单标为 resolved（已解决）。",
+            "name": "delivery",
+            "source": "demo/delivery.md",
+            "score": 0.8902753591537476
+          }
+        ],
+        "trace": [],
+        "proposal": null,
+        "usage": {
+          "model_calls": 1,
+          "prompt_tokens": 984,
+          "completion_tokens": 206,
+          "total_tokens": 1190
+        },
+        "elapsed_ms": 2119,
+        "created_at": "2026-10-19T22:37:19.302037+00:00"
+      }
+    },
+    {
+      "case_id": "unknown_policy",
+      "criterion": "Explicitly report missing policy, no invented amounts or staged writes",
+      "mode": "agent",
+      "mechanical_check_passed": true,
+      "run": {
+        "id": "37b22034-cfbd-43f5-9012-d8f44ba702be",
+        "question": "公司火星运输损坏赔偿金额和承诺到账天数分别是多少？只根据内部知识库回答，不要更新工单。",
+        "ticket_id": null,
+        "mode": "agent",
+        "status": "completed",
+        "answer": "**结论：知识库中没有“火星运输损坏赔偿”的金额标准和承诺到账天数，无法给出具体数字。**\n\n核实结果：\n- 检索到的规范只涉及退款/退货流程，未包含任何运输损坏赔偿的金额标准或到账时限。\n- 知识库明确要求：知识库没有的赔偿、特殊合同、金额或政策必须说明没有依据，不能套用相似政策 [KB:aecbfc25-36fd-5855-adee-f82ffeb741e4]。\n- 相关可参考的通用原则：退款金额和到账时间以业务系统确认结果为准，客服不能承诺即时到账 [KB:f2667da5-1631-5a01-8da1-a111cfb0367f]；质量问题需先收集照片、购买凭证，由售后专员审核 [KB:6da11f74-1b1d-5532-ac50-f91653b466f3]。\n\n建议：\n1. 若确有该客户诉求，请提供工单号（及订单号），我先核实工单与订单的实际状态，再判断适用流程。\n2. 赔偿金额与到账天数需由售后专员/业务系统确认，我无法代为承诺。\n3. 本次未做任何工单更新。",
+        "evidence": [
+          {
+            "id": "aecbfc25-36fd-5855-adee-f82ffeb741e4",
+            "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+            "section": "不足与冲突",
+            "page": null,
+            "text": "## 不足与冲突\n缺少订单号、工单号或客户诉求时，先询问需要的字段，不能猜测客户记录。知识库没有的赔偿、特殊合同、金额或政策必须说明没有依据，不能套用相似政策。规范与当前订单备注冲突时，保留两方证据并转人工核实。",
+            "name": "operations",
+            "source": "demo/operations.md",
+            "score": 0.03200204813108039
+          },
+          {
+            "id": "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+            "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+            "section": "延迟与承运商升级",
+            "page": null,
+            "text": "## 延迟与承运商升级\n订单状态为 delayed 时，客服应查询订单中的承运商备注，通知客户预计延迟时间，并联系承运商核实。预计延迟超过24小时，需要升级物流专员。不能凭工单描述自行编造到达日期。\n工单应转为 in_progress（处理中），记录查询到的订单号、实际延迟和升级原因。承运商尚未确认送达时，不能将工单标为 resolved（已解决）。",
+            "name": "delivery",
+            "source": "demo/delivery.md",
+            "score": 0.03125763125763126
+          },
+          {
+            "id": "f2667da5-1631-5a01-8da1-a111cfb0367f",
+            "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+            "section": "未发货订单",
+            "page": null,
+            "text": "## 未发货订单\n订单状态为 paid 且尚未发货时，客户可以申请取消。客服需核对订单状态与客户诉求，建立售后申请。退款金额和到账时间以业务系统确认结果为准；客服不能承诺即时到账。",
+            "name": "refund",
+            "source": "demo/refund.md",
+            "score": 0.03252247488101534
+          },
+          {
+            "id": "6da11f74-1b1d-5532-ac50-f91653b466f3",
+            "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+            "section": "已发货与签收订单",
+            "page": null,
+            "text": "## 已发货与签收订单\n已发货订单不能直接取消，需走退货申请。签收后7天内，商品未使用且包装完整，可提交退货审核。出现质量问题时先收集照片、购买凭证，由售后专员审核。检索规范不等于退款审批完成。\n系统当前仅可更新工单，不支持直接执行退款或取消订单。",
+            "name": "refund",
+            "source": "demo/refund.md",
+            "score": 0.031009615384615385
+          }
+        ],
+        "trace": [
+          {
+            "step": 1,
+            "tool": "knowledge_search",
+            "arguments": {
+              "query": "火星运输 损坏赔偿 金额 到账天数"
+            },
+            "result": [
+              {
+                "id": "aecbfc25-36fd-5855-adee-f82ffeb741e4",
+                "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+                "section": "不足与冲突",
+                "page": null,
+                "text": "## 不足与冲突\n缺少订单号、工单号或客户诉求时，先询问需要的字段，不能猜测客户记录。知识库没有的赔偿、特殊合同、金额或政策必须说明没有依据，不能套用相似政策。规范与当前订单备注冲突时，保留两方证据并转人工核实。",
+                "name": "operations",
+                "source": "demo/operations.md",
+                "score": 0.03252247488101534
+              },
+              {
+                "id": "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+                "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+                "section": "延迟与承运商升级",
+                "page": null,
+                "text": "## 延迟与承运商升级\n订单状态为 delayed 时，客服应查询订单中的承运商备注，通知客户预计延迟时间，并联系承运商核实。预计延迟超过24小时，需要升级物流专员。不能凭工单描述自行编造到达日期。\n工单应转为 in_progress（处理中），记录查询到的订单号、实际延迟和升级原因。承运商尚未确认送达时，不能将工单标为 resolved（已解决）。",
+                "name": "delivery",
+                "source": "demo/delivery.md",
+                "score": 0.03200204813108039
+              },
+              {
+                "id": "f2667da5-1631-5a01-8da1-a111cfb0367f",
+                "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+                "section": "未发货订单",
+                "page": null,
+                "text": "## 未发货订单\n订单状态为 paid 且尚未发货时，客户可以申请取消。客服需核对订单状态与客户诉求，建立售后申请。退款金额和到账时间以业务系统确认结果为准；客服不能承诺即时到账。",
+                "name": "refund",
+                "source": "demo/refund.md",
+                "score": 0.031544957774465976
+              },
+              {
+                "id": "6da11f74-1b1d-5532-ac50-f91653b466f3",
+                "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+                "section": "已发货与签收订单",
+                "page": null,
+                "text": "## 已发货与签收订单\n已发货订单不能直接取消，需走退货申请。签收后7天内，商品未使用且包装完整，可提交退货审核。出现质量问题时先收集照片、购买凭证，由售后专员审核。检索规范不等于退款审批完成。\n系统当前仅可更新工单，不支持直接执行退款或取消订单。",
+                "name": "refund",
+                "source": "demo/refund.md",
+                "score": 0.03125763125763126
+              }
+            ],
+            "duration_ms": 41,
+            "status": "ok"
+          },
+          {
+            "step": 2,
+            "tool": "knowledge_search",
+            "arguments": {
+              "query": "运输损坏赔偿标准 赔付金额 承诺到账时间"
+            },
+            "result": [
+              {
+                "id": "f2667da5-1631-5a01-8da1-a111cfb0367f",
+                "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+                "section": "未发货订单",
+                "page": null,
+                "text": "## 未发货订单\n订单状态为 paid 且尚未发货时，客户可以申请取消。客服需核对订单状态与客户诉求，建立售后申请。退款金额和到账时间以业务系统确认结果为准；客服不能承诺即时到账。",
+                "name": "refund",
+                "source": "demo/refund.md",
+                "score": 0.03252247488101534
+              },
+              {
+                "id": "aecbfc25-36fd-5855-adee-f82ffeb741e4",
+                "document_id": "38d2052c-6ed1-598d-867b-54357ecf4db3",
+                "section": "不足与冲突",
+                "page": null,
+                "text": "## 不足与冲突\n缺少订单号、工单号或客户诉求时，先询问需要的字段，不能猜测客户记录。知识库没有的赔偿、特殊合同、金额或政策必须说明没有依据，不能套用相似政策。规范与当前订单备注冲突时，保留两方证据并转人工核实。",
+                "name": "operations",
+                "source": "demo/operations.md",
+                "score": 0.03200204813108039
+              },
+              {
+                "id": "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+                "document_id": "550bd858-a9aa-5495-b88a-7f55bb13a0aa",
+                "section": "延迟与承运商升级",
+                "page": null,
+                "text": "## 延迟与承运商升级\n订单状态为 delayed 时，客服应查询订单中的承运商备注，通知客户预计延迟时间，并联系承运商核实。预计延迟超过24小时，需要升级物流专员。不能凭工单描述自行编造到达日期。\n工单应转为 in_progress（处理中），记录查询到的订单号、实际延迟和升级原因。承运商尚未确认送达时，不能将工单标为 resolved（已解决）。",
+                "name": "delivery",
+                "source": "demo/delivery.md",
+                "score": 0.03125763125763126
+              },
+              {
+                "id": "6da11f74-1b1d-5532-ac50-f91653b466f3",
+                "document_id": "dc4ec598-0b08-564d-82ba-4f37851fb65a",
+                "section": "已发货与签收订单",
+                "page": null,
+                "text": "## 已发货与签收订单\n已发货订单不能直接取消，需走退货申请。签收后7天内，商品未使用且包装完整，可提交退货审核。出现质量问题时先收集照片、购买凭证，由售后专员审核。检索规范不等于退款审批完成。\n系统当前仅可更新工单，不支持直接执行退款或取消订单。",
+                "name": "refund",
+                "source": "demo/refund.md",
+                "score": 0.031009615384615385
+              }
+            ],
+            "duration_ms": 29,
+            "status": "ok"
+          }
+        ],
+        "proposal": null,
+        "usage": {
+          "model_calls": 2,
+          "prompt_tokens": 3531,
+          "completion_tokens": 368,
+          "total_tokens": 3899
+        },
+        "elapsed_ms": 4013,
+        "created_at": "2026-10-19T22:37:21.461206+00:00"
+      }
+    }
+  ]
+}
