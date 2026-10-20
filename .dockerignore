@@ -1,0 +1,13 @@
+.git
+.env
+.env.*
+.venv
+**/node_modules
+frontend/dist
+.superpowers
+.playwright-cli
+backend
+*.pdf
+artifacts
+data
+**/__pycache__
