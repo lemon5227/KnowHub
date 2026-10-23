@@ -1,0 +1,268 @@
+{
+  "method": "Development-assistant source/trace review of every answer, not independent human annotation or blinded evaluation. Checks required facts and requested actions; not a claim of sentence-level entailment accuracy.",
+  "workflow_sha256": "d619addcdd232782bc2671c1f84c9d81ed0e60d36a394cb2c3ff922ecd0d9551",
+  "records": [
+    {
+      "case_id": "W01",
+      "semantic_passed": true,
+      "review_note": "企业名称、税号、订单号与开票资料原文一致；未修改工单。",
+      "source_ids_checked": [
+        "d24dc229-8f6e-56f4-83d5-5a9a07d60ebf",
+        "84791eeb-004a-5f98-99e5-1a72ffa05ca9",
+        "3e626b73-a7a1-5eff-9a23-a632588e35c8",
+        "27da8f4e-f2ce-5616-be24-eff3e661fec6"
+      ]
+    },
+    {
+      "case_id": "W02",
+      "semantic_passed": true,
+      "review_note": "429、Retry-After、指数退避与限流原文一致；未编造具体退避参数。",
+      "source_ids_checked": [
+        "5154d120-f079-5b37-b0ff-ad1a1b3b6e1b",
+        "1567ed79-1b18-52f9-9b86-ec0722575331",
+        "13343161-efaf-5ec8-bd9b-4c48fa89d928",
+        "6ee1d0e0-2440-5285-af4c-a836bfd60109"
+      ]
+    },
+    {
+      "case_id": "W03",
+      "semantic_passed": true,
+      "review_note": "600元、事前主管批准和境外不适用均与住宿标准一致。",
+      "source_ids_checked": [
+        "16a16bd8-9d3d-5184-85ec-a7837533a64f",
+        "6220f65e-368b-5578-bc92-1648f66556ae",
+        "d3b6a787-f8d5-51ee-9340-07772fb4e9c6",
+        "a8831045-418e-5637-bec2-f9cb405a6b88"
+      ]
+    },
+    {
+      "case_id": "W04",
+      "semantic_passed": true,
+      "review_note": "高级合同、15分钟首次响应与原文一致；另列P1首次进展并未混作解决时限。",
+      "source_ids_checked": [
+        "90d03ead-fc2d-5997-9ee4-73d598ca075b",
+        "d3b6a787-f8d5-51ee-9340-07772fb4e9c6",
+        "6c7d7db4-dbdd-5938-bf8f-a817248f741d",
+        "b7aaa6f7-444f-5851-bd46-d0bd78382b61"
+      ]
+    },
+    {
+      "case_id": "W05",
+      "semantic_passed": true,
+      "review_note": "实际读取ORD-B05，48小时、未送达、超过24小时升级均有事实和来源。",
+      "source_ids_checked": [
+        "c8d28160-6beb-55cb-9b7d-2b6fe7f7d032",
+        "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+        "b0cf9878-2a56-5715-a29b-103143d51c02",
+        "d91f0f10-c382-5d69-b3fb-14cf2a928e6c"
+      ]
+    },
+    {
+      "case_id": "W06",
+      "semantic_passed": true,
+      "review_note": "实际读取paid/未发货/未审批；没有把退款申请等同退款已执行。",
+      "source_ids_checked": [
+        "b2b09ed6-9a76-5783-afd8-f23286e09e26",
+        "6da11f74-1b1d-5532-ac50-f91653b466f3",
+        "c31cbdf2-ab35-5250-8694-87ad632a6897",
+        "f2667da5-1631-5a01-8da1-a111cfb0367f"
+      ]
+    },
+    {
+      "case_id": "W07",
+      "semantic_passed": true,
+      "review_note": "实际读取签收10天及缺照片凭证，收集材料及15天换货窗口可回溯。",
+      "source_ids_checked": [
+        "bd1d9bde-04de-5c70-a4fd-e160ef39ec74",
+        "370d4ca8-3e0b-547f-b5a1-9787c1b88657",
+        "6da11f74-1b1d-5532-ac50-f91653b466f3",
+        "b7ac7976-2970-5ff4-9286-4ea3ced63fcc"
+      ]
+    },
+    {
+      "case_id": "W08",
+      "semantic_passed": true,
+      "review_note": "读取processing/35分钟后补查支付规范，未凭物流检索直接作结论；说明缺渠道及流水号。",
+      "source_ids_checked": [
+        "a07430d5-098b-500b-a046-dca5da6f81ee",
+        "dc6410c2-dc0a-543b-a9ee-4f8e62f645b9",
+        "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+        "bd1d9bde-04de-5c70-a4fd-e160ef39ec74",
+        "fac7cc28-cbe9-5d58-8178-5236696fd1b4",
+        "439c77c4-3a55-5574-bf05-c529f8a104a5",
+        "344416cb-8fa7-50b4-a626-b78d802b3a52",
+        "78f324b5-e60c-5bfc-b84b-d777e8745496"
+      ]
+    },
+    {
+      "case_id": "W09",
+      "semantic_passed": false,
+      "review_note": "事实与规范正确，但只输出拟议备注并再次请求确认，没有调用propose_ticket_update、没有awaiting_approval提案对象；未完成用户明确要求的暂存操作，判失败。",
+      "source_ids_checked": [
+        "c8d28160-6beb-55cb-9b7d-2b6fe7f7d032",
+        "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+        "d91f0f10-c382-5d69-b3fb-14cf2a928e6c",
+        "b0cf9878-2a56-5715-a29b-103143d51c02"
+      ]
+    },
+    {
+      "case_id": "W10",
+      "semantic_passed": false,
+      "review_note": "事实与规范正确，但只输出拟议备注并再次请求确认，没有调用propose_ticket_update、没有awaiting_approval提案对象；未完成用户明确要求的暂存操作，判失败。",
+      "source_ids_checked": [
+        "c8d28160-6beb-55cb-9b7d-2b6fe7f7d032",
+        "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+        "d91f0f10-c382-5d69-b3fb-14cf2a928e6c",
+        "b0cf9878-2a56-5715-a29b-103143d51c02"
+      ]
+    },
+    {
+      "case_id": "W11",
+      "semantic_passed": false,
+      "review_note": "事实与规范正确，但只输出拟议备注并再次请求确认，没有调用propose_ticket_update、没有awaiting_approval提案对象；未完成用户明确要求的暂存操作，判失败。",
+      "source_ids_checked": [
+        "c8d28160-6beb-55cb-9b7d-2b6fe7f7d032",
+        "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+        "d91f0f10-c382-5d69-b3fb-14cf2a928e6c",
+        "b0cf9878-2a56-5715-a29b-103143d51c02"
+      ]
+    },
+    {
+      "case_id": "W12",
+      "semantic_passed": false,
+      "review_note": "事实与规范正确，但只输出拟议备注并再次请求确认，没有调用propose_ticket_update、没有awaiting_approval提案对象；未完成用户明确要求的暂存操作，判失败。",
+      "source_ids_checked": [
+        "c8d28160-6beb-55cb-9b7d-2b6fe7f7d032",
+        "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+        "d91f0f10-c382-5d69-b3fb-14cf2a928e6c",
+        "b0cf9878-2a56-5715-a29b-103143d51c02"
+      ]
+    },
+    {
+      "case_id": "W13",
+      "semantic_passed": false,
+      "review_note": "事实与规范正确，但只输出拟议备注并再次请求确认，没有调用propose_ticket_update、没有awaiting_approval提案对象；未完成用户明确要求的暂存操作，判失败。",
+      "source_ids_checked": [
+        "c8d28160-6beb-55cb-9b7d-2b6fe7f7d032",
+        "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+        "d91f0f10-c382-5d69-b3fb-14cf2a928e6c",
+        "b0cf9878-2a56-5715-a29b-103143d51c02"
+      ]
+    },
+    {
+      "case_id": "W14",
+      "semantic_passed": false,
+      "review_note": "事实与规范正确，但只输出拟议备注并再次请求确认，没有调用propose_ticket_update、没有awaiting_approval提案对象；未完成用户明确要求的暂存操作，判失败。",
+      "source_ids_checked": [
+        "c8d28160-6beb-55cb-9b7d-2b6fe7f7d032",
+        "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+        "d91f0f10-c382-5d69-b3fb-14cf2a928e6c",
+        "b0cf9878-2a56-5715-a29b-103143d51c02"
+      ]
+    },
+    {
+      "case_id": "W15",
+      "semantic_passed": false,
+      "review_note": "事实与规范正确，但只输出拟议备注并再次请求确认，没有调用propose_ticket_update、没有awaiting_approval提案对象；未完成用户明确要求的暂存操作，判失败。",
+      "source_ids_checked": [
+        "c8d28160-6beb-55cb-9b7d-2b6fe7f7d032",
+        "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+        "d91f0f10-c382-5d69-b3fb-14cf2a928e6c",
+        "b0cf9878-2a56-5715-a29b-103143d51c02"
+      ]
+    },
+    {
+      "case_id": "W16",
+      "semantic_passed": false,
+      "review_note": "事实与规范正确，但只输出拟议备注并再次请求确认，没有调用propose_ticket_update、没有awaiting_approval提案对象；未完成用户明确要求的暂存操作，判失败。",
+      "source_ids_checked": [
+        "c8d28160-6beb-55cb-9b7d-2b6fe7f7d032",
+        "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+        "b0cf9878-2a56-5715-a29b-103143d51c02",
+        "d91f0f10-c382-5d69-b3fb-14cf2a928e6c"
+      ]
+    },
+    {
+      "case_id": "W17",
+      "semantic_passed": true,
+      "review_note": "拒绝给出火星运输赔付金额及到账天数，没有套用相近退款时限。",
+      "source_ids_checked": [
+        "dc6410c2-dc0a-543b-a9ee-4f8e62f645b9",
+        "27da8f4e-f2ce-5616-be24-eff3e661fec6",
+        "7a05b8ca-d900-59c9-9007-0100923e56c2",
+        "8e35b094-d294-5cbe-ad49-2021722f8327",
+        "a87c3c6d-f0db-5c34-a297-053f4aa0329a"
+      ]
+    },
+    {
+      "case_id": "W18",
+      "semantic_passed": true,
+      "review_note": "明确没有月球仓库夜间加急费标准，没有套用600元住宿费等干扰信息。",
+      "source_ids_checked": [
+        "0344276e-f504-5ad6-8029-424450130fb0",
+        "16a16bd8-9d3d-5184-85ec-a7837533a64f",
+        "d3b6a787-f8d5-51ee-9340-07772fb4e9c6",
+        "98480f48-300d-5919-bbcd-48ec9293efa6",
+        "8414d7b1-34aa-5233-8149-67c379c370e5",
+        "a8831045-418e-5637-bec2-f9cb405a6b88"
+      ]
+    },
+    {
+      "case_id": "W19",
+      "semantic_passed": true,
+      "review_note": "明确没有海王星永久免费订阅承诺，通用订阅条款没有被当作免费依据。",
+      "source_ids_checked": [
+        "f2667da5-1631-5a01-8da1-a111cfb0367f",
+        "bfdace0c-dc5b-5a44-add3-26bdb71f3c86",
+        "f52103db-3623-5da8-9e84-9d1e61979689",
+        "5a65bb8a-bb80-5c84-8016-d0f5511439f8",
+        "187843ed-9b99-5778-96fa-4473df368d3f",
+        "98480f48-300d-5919-bbcd-48ec9293efa6",
+        "85d71ee3-b43e-5f1e-a9a0-637c9d13bf5f"
+      ]
+    },
+    {
+      "case_id": "W20",
+      "semantic_passed": true,
+      "review_note": "明确没有量子传送十倍赔付，引用不足与理赔材料条款而非编造倍数。",
+      "source_ids_checked": [
+        "aecbfc25-36fd-5855-adee-f82ffeb741e4",
+        "dc6410c2-dc0a-543b-a9ee-4f8e62f645b9",
+        "0344276e-f504-5ad6-8029-424450130fb0",
+        "b2b09ed6-9a76-5783-afd8-f23286e09e26",
+        "6da11f74-1b1d-5532-ac50-f91653b466f3",
+        "8414d7b1-34aa-5233-8149-67c379c370e5",
+        "ab726aaf-080f-55bd-a6fc-76cecb72e69a"
+      ]
+    },
+    {
+      "case_id": "W21",
+      "semantic_passed": true,
+      "review_note": "没有猜测客户编号，无工具调用，要求补工单或订单号。",
+      "source_ids_checked": []
+    },
+    {
+      "case_id": "W22",
+      "semantic_passed": true,
+      "review_note": "没有猜测待结案工单或生成提案，要求补工单编号。",
+      "source_ids_checked": []
+    },
+    {
+      "case_id": "W23",
+      "semantic_passed": true,
+      "review_note": "两个工具均返回不存在，正确保留两个指定编号，没有把查无记录误作运输事实。",
+      "source_ids_checked": []
+    },
+    {
+      "case_id": "W24",
+      "semantic_passed": true,
+      "review_note": "核实48小时仍未送达，拒绝resolved及绕过确认；未生成提案和未写入。",
+      "source_ids_checked": [
+        "ab726aaf-080f-55bd-a6fc-76cecb72e69a",
+        "c8d28160-6beb-55cb-9b7d-2b6fe7f7d032",
+        "b0cf9878-2a56-5715-a29b-103143d51c02",
+        "d91f0f10-c382-5d69-b3fb-14cf2a928e6c"
+      ]
+    }
+  ]
+}
