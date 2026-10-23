@@ -1,0 +1,710 @@
+[
+  {
+    "id": "Q001",
+    "category": "paraphrase",
+    "question": "还没交给快递，买家想换个收货地点，客服需先做哪些确认？",
+    "relevant": [
+      {
+        "source": "benchmark/address.md",
+        "section": "收件信息变更：发货前更址"
+      }
+    ]
+  },
+  {
+    "id": "Q002",
+    "category": "paraphrase",
+    "question": "包裹送到后还能走修改地址申请吗？",
+    "relevant": [
+      {
+        "source": "benchmark/address.md",
+        "section": "收件信息变更：签收后更址"
+      }
+    ]
+  },
+  {
+    "id": "Q003",
+    "category": "paraphrase",
+    "question": "一分钱还没付的交易，关单需要办退款吗？",
+    "relevant": [
+      {
+        "source": "benchmark/cancel.md",
+        "section": "订单撤销：待付款撤销"
+      }
+    ]
+  },
+  {
+    "id": "Q004",
+    "category": "paraphrase",
+    "question": "货已经发出了，客户说不要了，能直接撤单吗？",
+    "relevant": [
+      {
+        "source": "benchmark/cancel.md",
+        "section": "订单撤销：已发货撤销"
+      }
+    ]
+  },
+  {
+    "id": "Q005",
+    "category": "paraphrase",
+    "question": "财务同意把钱退回储蓄卡，通常需要等多久，周末算不算？",
+    "relevant": [
+      {
+        "source": "benchmark/refund.md",
+        "section": "退款进度：银行卡退款"
+      }
+    ]
+  },
+  {
+    "id": "Q006",
+    "category": "paraphrase",
+    "question": "银行卡退钱超过了约定上限，客服要收集什么并提交哪个单据？",
+    "relevant": [
+      {
+        "source": "benchmark/refund.md",
+        "section": "退款进度：超时追踪"
+      }
+    ]
+  },
+  {
+    "id": "Q007",
+    "category": "paraphrase",
+    "question": "买家收货第六天，没用过且盒子齐全，是否可以申请反悔退货？",
+    "relevant": [
+      {
+        "source": "benchmark/return.md",
+        "section": "退货受理：无理由退货"
+      }
+    ]
+  },
+  {
+    "id": "Q008",
+    "category": "paraphrase",
+    "question": "质量问题获售后认可后，寄回去的普通运费由谁付？",
+    "relevant": [
+      {
+        "source": "benchmark/return.md",
+        "section": "退货受理：退货运费"
+      }
+    ]
+  },
+  {
+    "id": "Q009",
+    "category": "paraphrase",
+    "question": "快递预计晚两天还未送到，需要升级给谁，工单该保持什么状态？",
+    "relevant": [
+      {
+        "source": "benchmark/delay.md",
+        "section": "配送延误：延迟升级"
+      }
+    ]
+  },
+  {
+    "id": "Q010",
+    "category": "paraphrase",
+    "question": "系统显示物流晚点，客服可以当场承诺现金补偿吗？",
+    "relevant": [
+      {
+        "source": "benchmark/delay.md",
+        "section": "配送延误：延迟补偿"
+      }
+    ]
+  },
+  {
+    "id": "Q011",
+    "category": "paraphrase",
+    "question": "包裹三天没动静，能直接判定丢件赔钱吗？",
+    "relevant": [
+      {
+        "source": "benchmark/lost.md",
+        "section": "运输丢失：疑似丢件"
+      }
+    ]
+  },
+  {
+    "id": "Q012",
+    "category": "paraphrase",
+    "question": "给物流公司提运输理赔要准备哪四类材料？",
+    "relevant": [
+      {
+        "source": "benchmark/lost.md",
+        "section": "运输丢失：理赔资料"
+      }
+    ]
+  },
+  {
+    "id": "Q013",
+    "category": "paraphrase",
+    "question": "物流说送到了，买家说没拿到，第一步核对什么证据？",
+    "relevant": [
+      {
+        "source": "benchmark/signature.md",
+        "section": "签收争议：本人否认签收"
+      }
+    ]
+  },
+  {
+    "id": "Q014",
+    "category": "paraphrase",
+    "question": "签收争议多久给首次反馈，超时找谁？",
+    "relevant": [
+      {
+        "source": "benchmark/signature.md",
+        "section": "签收争议：调查时限"
+      }
+    ]
+  },
+  {
+    "id": "Q015",
+    "category": "paraphrase",
+    "question": "单位要电子普票，除了订单号还必须收集哪些信息？",
+    "relevant": [
+      {
+        "source": "benchmark/invoice.md",
+        "section": "发票申请：开票资料"
+      }
+    ]
+  },
+  {
+    "id": "Q016",
+    "category": "paraphrase",
+    "question": "发票已经开出但公司名字错了，应如何处理？",
+    "relevant": [
+      {
+        "source": "benchmark/invoice.md",
+        "section": "发票申请：抬头修改"
+      }
+    ]
+  },
+  {
+    "id": "Q017",
+    "category": "paraphrase",
+    "question": "同一个买单动作扣了两笔款，要收集什么才能交人对账？",
+    "relevant": [
+      {
+        "source": "benchmark/payment.md",
+        "section": "支付异常：重复扣款"
+      }
+    ]
+  },
+  {
+    "id": "Q018",
+    "category": "identifier",
+    "question": "PAY-17 单子该填哪些字段，哪些敏感信息禁止记录？",
+    "relevant": [
+      {
+        "source": "benchmark/payment.md",
+        "section": "支付异常：支付单号"
+      }
+    ]
+  },
+  {
+    "id": "Q019",
+    "category": "paraphrase",
+    "question": "会员折扣能和订单券一起享受吗，一单最多几张订单券？",
+    "relevant": [
+      {
+        "source": "benchmark/coupon.md",
+        "section": "优惠券规则：叠加使用"
+      }
+    ]
+  },
+  {
+    "id": "Q020",
+    "category": "paraphrase",
+    "question": "下单时忘了用券，客服能直接改成交金额吗？",
+    "relevant": [
+      {
+        "source": "benchmark/coupon.md",
+        "section": "优惠券规则：差价申请"
+      }
+    ]
+  },
+  {
+    "id": "Q021",
+    "category": "paraphrase",
+    "question": "设备买了十个月但纸质发票丢了，可以直接拒绝保修吗？",
+    "relevant": [
+      {
+        "source": "benchmark/warranty.md",
+        "section": "保修服务：保修期限"
+      }
+    ]
+  },
+  {
+    "id": "Q022",
+    "category": "identifier",
+    "question": "RMA-21 返修单要附什么，寄设备前要提醒什么？",
+    "relevant": [
+      {
+        "source": "benchmark/warranty.md",
+        "section": "保修服务：返修编号"
+      }
+    ]
+  },
+  {
+    "id": "Q023",
+    "category": "paraphrase",
+    "question": "收到商品十二天发现质量问题，是走换货审核还是直接只做维修？",
+    "relevant": [
+      {
+        "source": "benchmark/replacement.md",
+        "section": "换货处理：换货条件"
+      }
+    ]
+  },
+  {
+    "id": "Q024",
+    "category": "paraphrase",
+    "question": "退回的货仓库还没验收，客服能承诺先寄替换品吗？",
+    "relevant": [
+      {
+        "source": "benchmark/replacement.md",
+        "section": "换货处理：换货寄送"
+      }
+    ]
+  },
+  {
+    "id": "Q025",
+    "category": "paraphrase",
+    "question": "用户邮箱收不到验证码，要走什么恢复流程并收集什么，能要密码吗？",
+    "relevant": [
+      {
+        "source": "benchmark/account.md",
+        "section": "账号恢复：找回账号"
+      }
+    ]
+  },
+  {
+    "id": "Q026",
+    "category": "paraphrase",
+    "question": "连续输错五次密码进不去了，冻结多久，客服可否取消风控？",
+    "relevant": [
+      {
+        "source": "benchmark/account.md",
+        "section": "账号恢复：账号冻结"
+      }
+    ]
+  },
+  {
+    "id": "Q027",
+    "category": "paraphrase",
+    "question": "关闭自动扣款后，已经买的本月服务会立即停吗？",
+    "relevant": [
+      {
+        "source": "benchmark/subscription.md",
+        "section": "订阅续费：关闭续费"
+      }
+    ]
+  },
+  {
+    "id": "Q028",
+    "category": "paraphrase",
+    "question": "高级套餐改低级套餐何时生效，本月差价会自动退吗？",
+    "relevant": [
+      {
+        "source": "benchmark/subscription.md",
+        "section": "订阅续费：订阅降级"
+      }
+    ]
+  },
+  {
+    "id": "Q029",
+    "category": "paraphrase",
+    "question": "接口返回429，一直开更多线程重试可行吗，正确做法是什么？",
+    "relevant": [
+      {
+        "source": "benchmark/api.md",
+        "section": "API接入：API认证"
+      }
+    ]
+  },
+  {
+    "id": "Q030",
+    "category": "paraphrase",
+    "question": "报API故障要提供哪些排查字段，什么头的值不能粘贴？",
+    "relevant": [
+      {
+        "source": "benchmark/api.md",
+        "section": "API接入：API追踪"
+      }
+    ]
+  },
+  {
+    "id": "Q031",
+    "category": "paraphrase",
+    "question": "新同事需要查看客户库，谁发起谁批准，默认给多大权限？",
+    "relevant": [
+      {
+        "source": "benchmark/access.md",
+        "section": "内部权限：权限申请"
+      }
+    ]
+  },
+  {
+    "id": "Q032",
+    "category": "paraphrase",
+    "question": "离职生效以后IT多久禁用账号，还能保留API令牌吗？",
+    "relevant": [
+      {
+        "source": "benchmark/access.md",
+        "section": "内部权限：离职回收"
+      }
+    ]
+  },
+  {
+    "id": "Q033",
+    "category": "paraphrase",
+    "question": "客服页面手机号和身份证应怎样遮盖，有查询权就能导出明文吗？",
+    "relevant": [
+      {
+        "source": "benchmark/privacy.md",
+        "section": "客户数据保护：敏感字段"
+      }
+    ]
+  },
+  {
+    "id": "Q034",
+    "category": "paraphrase",
+    "question": "客户要求删掉全部资料，客服能直接清空数据库吗？",
+    "relevant": [
+      {
+        "source": "benchmark/privacy.md",
+        "section": "客户数据保护：数据删除"
+      }
+    ]
+  },
+  {
+    "id": "Q035",
+    "category": "paraphrase",
+    "question": "服务密钥被公开了，第一步怎么办，哪些证据要保留？",
+    "relevant": [
+      {
+        "source": "benchmark/security.md",
+        "section": "安全事件：凭证泄露"
+      }
+    ]
+  },
+  {
+    "id": "Q036",
+    "category": "paraphrase",
+    "question": "客户数据确实泄露属于什么级别，多久内通知谁？",
+    "relevant": [
+      {
+        "source": "benchmark/security.md",
+        "section": "安全事件：事件级别"
+      }
+    ]
+  },
+  {
+    "id": "Q037",
+    "category": "paraphrase",
+    "question": "全站六分钟登不上去了，应定哪一级，首次进展多久给？",
+    "relevant": [
+      {
+        "source": "benchmark/incident.md",
+        "section": "系统故障分级：全站故障"
+      }
+    ]
+  },
+  {
+    "id": "Q038",
+    "category": "identifier",
+    "question": "P1恢复之后复盘期限和必须包含的内容是什么？",
+    "relevant": [
+      {
+        "source": "benchmark/incident.md",
+        "section": "系统故障分级：复盘要求"
+      }
+    ]
+  },
+  {
+    "id": "Q039",
+    "category": "paraphrase",
+    "question": "业务库全量备份几点执行，留多少天，放在哪里？",
+    "relevant": [
+      {
+        "source": "benchmark/backup.md",
+        "section": "备份与恢复：常规备份"
+      }
+    ]
+  },
+  {
+    "id": "Q040",
+    "category": "paraphrase",
+    "question": "允许最多丢多少时间的数据和多长恢复时间，这两个演练目标分别是什么？",
+    "relevant": [
+      {
+        "source": "benchmark/backup.md",
+        "section": "备份与恢复：恢复目标"
+      }
+    ]
+  },
+  {
+    "id": "Q041",
+    "category": "paraphrase",
+    "question": "系统没货了，可以直接把采购预计日期说成肯定发货日吗？",
+    "relevant": [
+      {
+        "source": "benchmark/inventory.md",
+        "section": "库存与预售：缺货告知"
+      }
+    ]
+  },
+  {
+    "id": "Q042",
+    "category": "paraphrase",
+    "question": "付过钱的订单占库存多长时间，可以抢其他客户的预留吗？",
+    "relevant": [
+      {
+        "source": "benchmark/inventory.md",
+        "section": "库存与预售：库存预留"
+      }
+    ]
+  },
+  {
+    "id": "Q043",
+    "category": "paraphrase",
+    "question": "一笔六千元采购需要哪些人批准，可以拆成两笔绕审批吗？",
+    "relevant": [
+      {
+        "source": "benchmark/procurement.md",
+        "section": "企业采购：采购审批"
+      }
+    ]
+  },
+  {
+    "id": "Q044",
+    "category": "paraphrase",
+    "question": "采购货到了最晚什么时候验收，记录哪些内容？",
+    "relevant": [
+      {
+        "source": "benchmark/procurement.md",
+        "section": "企业采购：到货验收"
+      }
+    ]
+  },
+  {
+    "id": "Q045",
+    "category": "paraphrase",
+    "question": "出差回来多久内报销，要附哪些材料？",
+    "relevant": [
+      {
+        "source": "benchmark/expense.md",
+        "section": "费用报销：报销提交"
+      }
+    ]
+  },
+  {
+    "id": "Q046",
+    "category": "identifier",
+    "question": "EXP-31 财务通过后多久付款，待补资料时间是否算进去？",
+    "relevant": [
+      {
+        "source": "benchmark/expense.md",
+        "section": "费用报销：报销单号"
+      }
+    ]
+  },
+  {
+    "id": "Q047",
+    "category": "paraphrase",
+    "question": "标准支持的受理时间和普通咨询首次回复目标是什么，是否等同解决时限？",
+    "relevant": [
+      {
+        "source": "benchmark/sla.md",
+        "section": "企业服务等级：标准支持"
+      }
+    ]
+  },
+  {
+    "id": "Q048",
+    "category": "paraphrase",
+    "question": "申请可用性抵扣最晚什么时候交，谁审核，客服能定金额吗？",
+    "relevant": [
+      {
+        "source": "benchmark/sla.md",
+        "section": "企业服务等级：服务抵扣"
+      }
+    ]
+  },
+  {
+    "id": "Q049",
+    "category": "multi_evidence",
+    "question": "买家要求改地址：还在仓库和已经交快递这两种情况的流程分别是什么？",
+    "relevant": [
+      {
+        "source": "benchmark/address.md",
+        "section": "收件信息变更：发货前更址"
+      },
+      {
+        "source": "benchmark/address.md",
+        "section": "收件信息变更：运输中改派"
+      }
+    ]
+  },
+  {
+    "id": "Q050",
+    "category": "multi_evidence",
+    "question": "未付款和已发货的订单，撤销时是否都可以直接关单？分别怎么处理？",
+    "relevant": [
+      {
+        "source": "benchmark/cancel.md",
+        "section": "订单撤销：待付款撤销"
+      },
+      {
+        "source": "benchmark/cancel.md",
+        "section": "订单撤销：已发货撤销"
+      }
+    ]
+  },
+  {
+    "id": "Q051",
+    "category": "multi_evidence",
+    "question": "银行卡退款的正常等待区间是什么，超过多久应提交哪种追踪单？",
+    "relevant": [
+      {
+        "source": "benchmark/refund.md",
+        "section": "退款进度：银行卡退款"
+      },
+      {
+        "source": "benchmark/refund.md",
+        "section": "退款进度：超时追踪"
+      }
+    ]
+  },
+  {
+    "id": "Q052",
+    "category": "multi_evidence",
+    "question": "完整未使用的商品收货后多久可以申请无理由退货，客户和商家的退货运费责任怎么分？",
+    "relevant": [
+      {
+        "source": "benchmark/return.md",
+        "section": "退货受理：无理由退货"
+      },
+      {
+        "source": "benchmark/return.md",
+        "section": "退货受理：退货运费"
+      }
+    ]
+  },
+  {
+    "id": "Q053",
+    "category": "multi_evidence",
+    "question": "三天无物流轨迹与承运商已书面确认丢失，处理动作有何不同？",
+    "relevant": [
+      {
+        "source": "benchmark/lost.md",
+        "section": "运输丢失：疑似丢件"
+      },
+      {
+        "source": "benchmark/lost.md",
+        "section": "运输丢失：确认丢件"
+      }
+    ]
+  },
+  {
+    "id": "Q054",
+    "category": "multi_evidence",
+    "question": "企业开票要哪些身份资料；抬头开错后如何重新开票？",
+    "relevant": [
+      {
+        "source": "benchmark/invoice.md",
+        "section": "发票申请：开票资料"
+      },
+      {
+        "source": "benchmark/invoice.md",
+        "section": "发票申请：抬头修改"
+      }
+    ]
+  },
+  {
+    "id": "Q055",
+    "category": "multi_evidence",
+    "question": "重复扣款核查要哪些付款证据，建PAY-17时有哪些敏感字段不能填？",
+    "relevant": [
+      {
+        "source": "benchmark/payment.md",
+        "section": "支付异常：重复扣款"
+      },
+      {
+        "source": "benchmark/payment.md",
+        "section": "支付异常：支付单号"
+      }
+    ]
+  },
+  {
+    "id": "Q056",
+    "category": "multi_evidence",
+    "question": "登录连续失败被冻结且邮箱收不到验证码，冻结期限是多少，还有什么找回方法？",
+    "relevant": [
+      {
+        "source": "benchmark/account.md",
+        "section": "账号恢复：找回账号"
+      },
+      {
+        "source": "benchmark/account.md",
+        "section": "账号恢复：账号冻结"
+      }
+    ]
+  },
+  {
+    "id": "Q057",
+    "category": "multi_evidence",
+    "question": "停止下月续费与降低套餐各自什么时候影响使用，本周期会不会自动退差额？",
+    "relevant": [
+      {
+        "source": "benchmark/subscription.md",
+        "section": "订阅续费：关闭续费"
+      },
+      {
+        "source": "benchmark/subscription.md",
+        "section": "订阅续费：订阅降级"
+      }
+    ]
+  },
+  {
+    "id": "Q058",
+    "category": "multi_evidence",
+    "question": "员工最初申请客户库访问和后续申请临时导出权限，各要遵守哪些授权及到期规则？",
+    "relevant": [
+      {
+        "source": "benchmark/access.md",
+        "section": "内部权限：权限申请"
+      },
+      {
+        "source": "benchmark/access.md",
+        "section": "内部权限：临时权限"
+      }
+    ]
+  },
+  {
+    "id": "Q059",
+    "category": "multi_evidence",
+    "question": "客户数据外泄同时发现密钥泄露，需要如何处置密钥，按什么级别以及时间向谁报告？",
+    "relevant": [
+      {
+        "source": "benchmark/security.md",
+        "section": "安全事件：凭证泄露"
+      },
+      {
+        "source": "benchmark/security.md",
+        "section": "安全事件：事件级别"
+      }
+    ]
+  },
+  {
+    "id": "Q060",
+    "category": "multi_evidence",
+    "question": "常规备份的时间和保留期是多少，恢复演练使用什么RPO与RTO目标？",
+    "relevant": [
+      {
+        "source": "benchmark/backup.md",
+        "section": "备份与恢复：常规备份"
+      },
+      {
+        "source": "benchmark/backup.md",
+        "section": "备份与恢复：恢复目标"
+      }
+    ]
+  }
+]
