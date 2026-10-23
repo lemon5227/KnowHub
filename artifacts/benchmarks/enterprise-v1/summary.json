@@ -1,0 +1,159 @@
+{
+  "retrieval": {
+    "dense": {
+      "n": 60,
+      "recall@1": 0.7944444444444444,
+      "hit@1": 0.9166666666666666,
+      "all_evidence@1": 0.6833333333333333,
+      "recall@3": 0.9444444444444444,
+      "hit@3": 0.9666666666666667,
+      "all_evidence@3": 0.9166666666666666,
+      "recall@5": 0.9666666666666667,
+      "hit@5": 0.9833333333333333,
+      "all_evidence@5": 0.95,
+      "recall@8": 1.0,
+      "hit@8": 1,
+      "all_evidence@8": 1,
+      "mrr@8": 0.9454365079365079,
+      "latency_p50_ms": 19.0785,
+      "latency_p95_ms": 22.424599999999998,
+      "by_category": {
+        "identifier": {
+          "n": 4,
+          "recall@5": 1.0
+        },
+        "multi_evidence": {
+          "n": 12,
+          "recall@5": 1.0
+        },
+        "paraphrase": {
+          "n": 44,
+          "recall@5": 0.9545454545454546
+        }
+      }
+    },
+    "lexical": {
+      "n": 60,
+      "recall@1": 0.7472222222222222,
+      "hit@1": 0.85,
+      "all_evidence@1": 0.65,
+      "recall@3": 0.9361111111111111,
+      "hit@3": 0.95,
+      "all_evidence@3": 0.9166666666666666,
+      "recall@5": 0.9777777777777777,
+      "hit@5": 0.9833333333333333,
+      "all_evidence@5": 0.9666666666666667,
+      "recall@8": 0.9777777777777777,
+      "hit@8": 0.9833333333333333,
+      "all_evidence@8": 0.9666666666666667,
+      "mrr@8": 0.9047222222222222,
+      "latency_p50_ms": 8.701,
+      "latency_p95_ms": 11.343,
+      "by_category": {
+        "identifier": {
+          "n": 4,
+          "recall@5": 1.0
+        },
+        "multi_evidence": {
+          "n": 12,
+          "recall@5": 0.9722222222222222
+        },
+        "paraphrase": {
+          "n": 44,
+          "recall@5": 0.9772727272727273
+        }
+      }
+    },
+    "hybrid": {
+      "n": 60,
+      "recall@1": 0.7805555555555556,
+      "hit@1": 0.9,
+      "all_evidence@1": 0.6666666666666666,
+      "recall@3": 0.9694444444444444,
+      "hit@3": 0.9833333333333333,
+      "all_evidence@3": 0.95,
+      "recall@5": 1.0,
+      "hit@5": 1,
+      "all_evidence@5": 1,
+      "recall@8": 1.0,
+      "hit@8": 1,
+      "all_evidence@8": 1,
+      "mrr@8": 0.9422222222222222,
+      "latency_p50_ms": 25.2915,
+      "latency_p95_ms": 28.7602,
+      "by_category": {
+        "identifier": {
+          "n": 4,
+          "recall@5": 1.0
+        },
+        "multi_evidence": {
+          "n": 12,
+          "recall@5": 1.0
+        },
+        "paraphrase": {
+          "n": 44,
+          "recall@5": 1.0
+        }
+      }
+    }
+  },
+  "data": "Author-created synthetic policies, orders and tickets; not real customers or held-out public data",
+  "retrieval_artifact": "retrieval-corrected.json",
+  "workflow": {
+    "n": 24,
+    "expected_cases": 24,
+    "complete": true,
+    "mechanical_passed": 16,
+    "mechanical_success_rate": 0.6666666666666666,
+    "wilson_95": [
+      0.4670595949408046,
+      0.8202802131162036
+    ],
+    "by_kind": {
+      "missing_id": {
+        "n": 2,
+        "passed": 2
+      },
+      "missing_record": {
+        "n": 1,
+        "passed": 1
+      },
+      "policy": {
+        "n": 4,
+        "passed": 4
+      },
+      "read": {
+        "n": 4,
+        "passed": 4
+      },
+      "unknown": {
+        "n": 4,
+        "passed": 4
+      },
+      "unsafe_resolution": {
+        "n": 1,
+        "passed": 1
+      },
+      "update": {
+        "n": 8,
+        "passed": 0
+      }
+    },
+    "attempted_requests": 59,
+    "failed_requests": 0,
+    "total_tokens": 99060,
+    "tool_calls": 55,
+    "tool_schema_precondition_accepted": 55,
+    "no_unapproved_writes": 24,
+    "decisions": 0,
+    "decision_passed": 0,
+    "latency_p50_ms": 5408.5,
+    "latency_p95_ms": 6833.2,
+    "reviewed_passed": 16,
+    "reviewed_success_rate": 0.6666666666666666,
+    "reviewed_wilson_95": [
+      0.4670595949408046,
+      0.8202802131162036
+    ]
+  }
+}
