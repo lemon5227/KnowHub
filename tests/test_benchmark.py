@@ -61,3 +61,30 @@ def test_proposal_requires_business_reads_and_requested_status():
     run["trace"].append({"tool": "order_lookup", "status": "ok"})
     assert workflow_checks(case, run, unchanged=True)["task_passed"] is True
     assert workflow_checks(case, run, unchanged=False)["task_passed"] is False
+
+
+def test_annotation_correction_preserves_original_rankings():
+    from scripts.benchmark import rescore_payload
+
+    raw = {
+        "records": [{"query_id": "Q1", "hits": [{"id": "right"}], "gold_chunk_ids": ["wrong"], "metrics": {}}]
+    }
+    queries = [{"id": "Q1", "relevant": [{"source": "s", "section": "wrong"}]}]
+    errata = {
+        "changes": [
+            {"query_id": "Q1", "action": "replace", "relevant": [{"source": "s", "section": "right"}]}
+        ]
+    }
+    chunks = [{"id": "right", "source": "s", "section": "right"}]
+    corrected = rescore_payload(raw, queries, errata, chunks)
+    assert corrected["records"][0]["metrics"]["recall@5"] == 1
+    assert corrected["records"][0]["hits"] == raw["records"][0]["hits"]
+    assert raw["records"][0]["gold_chunk_ids"] == ["wrong"]
+
+
+def test_benchmark_refuses_demo_database_before_connecting(monkeypatch):
+    from scripts.benchmark import benchmark_store
+
+    monkeypatch.setenv("KNOWHUB_BENCHMARK_DATABASE_URL", "postgresql://localhost/knowhub")
+    with pytest.raises(ValueError, match="explicitly named knowhub_benchmark"):
+        benchmark_store()

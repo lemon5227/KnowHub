@@ -1,0 +1,12 @@
+{
+  "version": "1.1-annotation-only",
+  "reason": "Post-run manual source review found one wrong section assignment and five omitted equivalent/partial support chunks in the original SOPs. Original dataset, hashes and ranked retrieval.json are retained. No question, document, rank, embedding, model output or algorithm changed; the exact same ranking is rescored for all three methods.",
+  "changes": [
+    {"query_id": "Q029", "action": "replace", "relevant": [{"source": "benchmark/api.md", "section": "API接入：API限流"}], "reason": "HTTP 429 question was wrongly assigned to API authentication instead of API rate limits."},
+    {"query_id": "Q004", "action": "add", "relevant": [{"source": "demo/refund.md", "section": "已发货与签收订单"}], "reason": "Original SOP also states shipped orders cannot be directly cancelled and require a return request."},
+    {"query_id": "Q007", "action": "add", "relevant": [{"source": "demo/refund.md", "section": "已发货与签收订单"}], "reason": "Original SOP independently supports the seven-day unused/complete-packaging return condition."},
+    {"query_id": "Q009", "action": "add", "relevant": [{"source": "demo/delivery.md", "section": "延迟与承运商升级"}], "reason": "Original SOP also specifies the >24h specialist escalation and in_progress status."},
+    {"query_id": "Q049", "action": "add", "relevant": [{"source": "demo/delivery.md", "section": "退运与地址更正"}], "reason": "Original SOP supports both pre-shipment customer-confirmed address request and post-shipment carrier verification."},
+    {"query_id": "Q052", "action": "add", "relevant": [{"source": "demo/refund.md", "section": "已发货与签收订单"}], "reason": "Original SOP supports the returns-condition subquestion; it does not answer the freight-cost subquestion."}
+  ]
+}

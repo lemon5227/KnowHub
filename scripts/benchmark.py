@@ -15,6 +15,7 @@ import statistics
 import subprocess
 import time
 from collections import defaultdict
+from copy import deepcopy
 from importlib.metadata import version
 from pathlib import Path
 from urllib.parse import urlsplit, urlunsplit
@@ -152,6 +153,7 @@ def retrieval(data, output):
     store = benchmark_store()
     retriever = retriever_for(store, data)
     rows = store.all_chunks(retriever.embedder.name)
+    save(output / "corpus-index.json", {"chunks": rows})
     expected_sources = {d["source"] for d in data["corpus"]}
     if {r["source"] for r in rows} != expected_sources:
         raise ValueError("Unexpected corpus in isolated benchmark database")
@@ -327,6 +329,51 @@ def percentile(values, probability):
     return float(__import__("numpy").quantile(values, probability))
 
 
+def rescore_payload(raw, queries, errata, chunks):
+    judgments = {q["id"]: deepcopy(q["relevant"]) for q in queries}
+    for change in errata["changes"]:
+        if change["action"] == "replace":
+            judgments[change["query_id"]] = change["relevant"]
+        elif change["action"] == "add":
+            judgments[change["query_id"]] += change["relevant"]
+        else:
+            raise ValueError("Unknown annotation correction action")
+    corrected = deepcopy(raw)
+    for record in corrected["records"]:
+        relevant = set()
+        for positive in judgments[record["query_id"]]:
+            matching = {
+                c["id"]
+                for c in chunks
+                if c["source"] == positive["source"] and c["section"] == positive["section"]
+            }
+            if not matching:
+                raise ValueError("Corrected positive is absent from corpus index")
+            relevant.update(matching)
+        record["gold_chunk_ids"] = sorted(relevant)
+        record["metrics"] = retrieval_metrics([h["id"] for h in record["hits"]], relevant)
+    return corrected
+
+
+def rescore(output):
+    original = output / "retrieval.json"
+    errata_path = DATA / "judgment-errata.json"
+    errata = json.loads(errata_path.read_text())
+    result = rescore_payload(
+        json.loads(original.read_text()),
+        dataset()["queries"],
+        errata,
+        json.loads((output / "corpus-index.json").read_text())["chunks"],
+    )
+    result["annotation_correction"] = {
+        "version": errata["version"],
+        "ranking_changed": False,
+        "errata_sha256": hashlib.sha256(errata_path.read_bytes()).hexdigest(),
+        "original_result_sha256": hashlib.sha256(original.read_bytes()).hexdigest(),
+    }
+    save(output / "retrieval-corrected.json", result)
+
+
 def wilson(successes, n):
     if not n:
         return None
@@ -338,8 +385,12 @@ def wilson(successes, n):
 
 
 def summarize(output):
-    retrieval_data = json.loads((output / "retrieval.json").read_text())
+    retrieval_path = output / "retrieval-corrected.json"
+    if not retrieval_path.exists():
+        retrieval_path = output / "retrieval.json"
+    retrieval_data = json.loads(retrieval_path.read_text())
     summary = {"retrieval": {}, "data": retrieval_data["environment"]["data"]}
+    summary["retrieval_artifact"] = retrieval_path.name
     for mode in ["dense", "lexical", "hybrid"]:
         records = [r for r in retrieval_data["records"] if r["mode"] == mode]
         values = [r["elapsed_ms"] for r in records]
@@ -366,6 +417,8 @@ def summarize(output):
         decisions = [r["decision"] for r in records if "decision" in r]
         summary["workflow"] = {
             "n": len(records),
+            "expected_cases": 24,
+            "complete": len(records) == 24,
             "mechanical_passed": passed,
             "mechanical_success_rate": passed / len(records),
             "wilson_95": wilson(passed, len(records)),
@@ -387,18 +440,36 @@ def summarize(output):
             "latency_p50_ms": statistics.median(r["run"]["elapsed_ms"] for r in records),
             "latency_p95_ms": percentile([r["run"]["elapsed_ms"] for r in records], 0.95),
         }
+        manual_path = output / "manual-review.json"
+        if manual_path.exists():
+            review = json.loads(manual_path.read_text())
+            if review["workflow_sha256"] != hashlib.sha256(workflow_path.read_bytes()).hexdigest():
+                raise ValueError("Manual review refers to different model outputs")
+            labels = {r["case_id"]: r["semantic_passed"] for r in review["records"]}
+            if set(labels) != {r["case_id"] for r in records} or len(labels) != len(review["records"]):
+                raise ValueError("Manual review must cover each case exactly once")
+            passed = sum(r["checks"]["task_passed"] and labels[r["case_id"]] for r in records)
+            summary["workflow"].update(
+                {
+                    "reviewed_passed": passed,
+                    "reviewed_success_rate": passed / len(records),
+                    "reviewed_wilson_95": wilson(passed, len(records)),
+                }
+            )
     save(output / "summary.json", summary)
     print(json.dumps(summary, ensure_ascii=False, indent=2))
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("stage", choices=["retrieval", "workflow", "report"])
+    parser.add_argument("stage", choices=["retrieval", "workflow", "rescore", "report"])
     parser.add_argument("--output", type=Path, default=OUTPUT)
     args = parser.parse_args()
     load_dotenv()
     if args.stage == "report":
         summarize(args.output)
+    elif args.stage == "rescore":
+        rescore(args.output)
     else:
         {"retrieval": retrieval, "workflow": workflow}[args.stage](dataset(), args.output)
 
